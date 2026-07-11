@@ -501,6 +501,8 @@ class FilesystemIterator extends DirectoryIterator
 /**
  * The <b>RecursiveDirectoryIterator</b> provides
  * an interface for iterating recursively over filesystem directories.
+ * @template TKey of array-key
+ * @template-covariant TValue of SplFileInfo
  * @link https://php.net/manual/en/class.recursivedirectoryiterator.php
  */
 class RecursiveDirectoryIterator extends FilesystemIterator implements RecursiveIterator
@@ -571,7 +573,7 @@ class RecursiveDirectoryIterator extends FilesystemIterator implements Recursive
     /**
      * Retrieve the key for the current file
      * @link https://php.net/manual/en/filesystemiterator.key.php
-     * @return string the pathname or filename depending on the set flags.
+     * @return TKey the pathname or filename depending on the set flags.
      * See the FilesystemIterator constants.
      */
     #[TentativeType]
@@ -580,7 +582,7 @@ class RecursiveDirectoryIterator extends FilesystemIterator implements Recursive
     /**
      * The current file
      * @link https://php.net/manual/en/filesystemiterator.current.php
-     * @return string|SplFileInfo|self The filename, file information, or $this depending on the set flags.
+     * @return TValue The filename, file information, or $this depending on the set flags.
      * See the FilesystemIterator constants.
      */
     #[TentativeType]

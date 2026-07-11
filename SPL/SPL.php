@@ -234,6 +234,8 @@ interface RecursiveIterator extends Iterator
 
 /**
  * Can be used to iterate through recursive iterators.
+ * @template TKey of array-key
+ * @template-covariant TValue
  * @link https://php.net/manual/en/class.recursiveiteratoriterator.php
  */
 class RecursiveIteratorIterator implements OuterIterator
@@ -261,7 +263,7 @@ class RecursiveIteratorIterator implements OuterIterator
     /**
      * Construct a RecursiveIteratorIterator
      * @link https://php.net/manual/en/recursiveiteratoriterator.construct.php
-     * @param Traversable $iterator
+     * @param Traversable<TKey, TValue> $iterator
      * @param int $mode [optional] The operation mode. See class constants for details.
      * @param int $flags [optional] A bitmask of special flags. See class constants for details.
      * @since 5.1
@@ -291,7 +293,7 @@ class RecursiveIteratorIterator implements OuterIterator
     /**
      * Access the current key
      * @link https://php.net/manual/en/recursiveiteratoriterator.key.php
-     * @return mixed The key of the current element.
+     * @return TKey The key of the current element.
      */
     #[TentativeType]
     public function key(): mixed {}
@@ -299,7 +301,7 @@ class RecursiveIteratorIterator implements OuterIterator
     /**
      * Access the current element value
      * @link https://php.net/manual/en/recursiveiteratoriterator.current.php
-     * @return mixed The current elements value.
+     * @return TValue The current elements value.
      */
     #[TentativeType]
     public function current(): mixed {}

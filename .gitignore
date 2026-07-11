@@ -29,3 +29,6 @@ ReflectionData.json
 
 # Output of tests/StubsMigrator.php (per-version stub trees)
 versioned/
+
+temp/
+.vscode/
