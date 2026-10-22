@@ -36,20 +36,15 @@ enum CheckType: string
     case RETURN_TYPES = 'ReturnTypesCheck';
 
     /**
-     * Validates that functions exist in reflection.
-     * Checks basic existence of entities.
+     * Validates that a top-level entity (function, class, enum, or interface) present in
+     * reflection also exists in stubs. Reused across those entity types via EntityTypeConfig;
+     * the check reports this name for all of them, so the entity variant is distinguished by
+     * the EntityType of the known problem, not by a separate check name.
+     *
+     * Scope note: global constants have their own ConstantExistsCheck / CONSTANT_EXISTS, and
+     * member existence is covered by CLASS_METHODS_EXIST, CLASS_PROPERTIES_EXIST and ENUM_CASES.
      */
-    case FUNCTION_EXISTS = 'FunctionExistsCheck';
-
-    /**
-     * Validates that methods exist in reflection.
-     */
-    case METHOD_EXISTS = 'MethodExistsCheck';
-
-    /**
-     * Validates that classes exist in reflection.
-     */
-    case CLASS_EXISTS = 'ClassExistsCheck';
+    case ENTITY_EXISTS = 'EntityExistsCheck';
 
     /**
      * Validates that parent class in stubs matches parent class in reflection.
@@ -58,6 +53,9 @@ enum CheckType: string
 
     /**
      * Validates that directly implemented interfaces in stubs match reflection.
+     * Reused for classes and enums via EntityTypeConfig; the check reports this
+     * name for both, so the entity variant is distinguished by the EntityType of
+     * the known problem, not by a separate check name.
      */
     case CLASS_INTERFACES = 'ClassInterfacesCheck';
 
@@ -65,6 +63,20 @@ enum CheckType: string
      * Validates that all methods present in reflection also exist in stubs.
      */
     case CLASS_METHODS_EXIST = 'ClassMethodsExistCheck';
+
+    /**
+     * Validates the reverse of CLASS_METHODS_EXIST: that a method declared in stubs actually
+     * exists in reflection for the version under test.
+     *
+     * Every other check runs reflection->stubs, so a stub declaring a member that the runtime does
+     * not have was invisible to the whole suite — which is how five SplFixedArray iterator methods,
+     * DOMDocument::renameNode, DOMText::replaceWholeText and ReflectionZendExtension::export sat
+     * unbounded past their removal in 8.0 while 412k tests passed.
+     *
+     * Scoped to StubCategory::CORE and BUNDLED, and skips magic methods and
+     * PS_UNRESERVE_PREFIX_* — see ClassStaleMethodsCheck for why each exclusion is required.
+     */
+    case CLASS_STALE_METHODS = 'ClassStaleMethodsCheck';
 
     /**
      * Validates that the `final` attribute on methods in stubs matches reflection.
@@ -128,73 +140,52 @@ enum CheckType: string
     case INTERFACE_PARENT_INTERFACES = 'InterfaceParentInterfacesCheck';
 
     /**
-     * Validates that directly implemented interfaces in enum stubs match reflection.
-     */
-    case ENUM_INTERFACES = 'EnumInterfacesCheck';
-
-    /**
      * Validates that all enum cases present in reflection also exist in stubs.
      */
     case ENUM_CASES = 'EnumCasesCheck';
 
     /**
-     * Validates that the `final` modifier on a class in stubs matches reflection.
-     * Only meaningful against the latest PHP version, as stubs cannot express version-specific finality.
+     * Validates that the `final` modifier in stubs matches reflection.
+     * Reused for classes and enums via EntityTypeConfig; the check reports this
+     * name regardless of entity type, so known problems for enums are keyed by
+     * (ENUM_TYPE, ClassFinalCheck), not a separate enum-specific name.
+     *
+     * Checked against every supported PHP version, not just the latest: registered
+     * EARLIEST..LATEST for classes and 8.1..LATEST for enums (8.1 being when enums were
+     * introduced), and AbstractFinalCheck::supports() accepts all versions.
+     *
+     * A stub declares `final` without version awareness, so a class whose finality changed
+     * across releases necessarily disagrees with reflection on one side of that boundary.
+     * Those cases are suppressed individually by a version-ranged known problem rather than
+     * by narrowing the check — see the CLASS_FINAL entries in DefaultKnownProblemsProvider,
+     * for example `\GMP` (final since 8.4, suppressed for EARLIEST..8.3) and `\Directory`
+     * (final since 8.5, suppressed for 8.5..LATEST). Keeping the check version-wide is what
+     * makes those boundaries explicit instead of silently unchecked.
      */
     case CLASS_FINAL = 'ClassFinalCheck';
 
     /**
-     * Validates that the `final` modifier on an enum in stubs matches reflection.
-     */
-    case ENUM_FINAL = 'EnumFinalCheck';
-
-    /**
-     * Validates that constants declared in class stubs exist in reflection.
+     * Validates that constants declared in stubs exist in reflection.
+     * Reused for classes, interfaces and enums via EntityTypeConfig; the check
+     * reports this name for all three, so the entity variant is distinguished by
+     * the EntityType of the known problem, not by a separate check name.
      */
     case CLASS_CONSTANTS = 'ClassConstantsCheck';
 
     /**
-     * Validates that constants declared in interface stubs exist in reflection.
-     */
-    case INTERFACE_CONSTANTS = 'InterfaceConstantsCheck';
-
-    /**
-     * Validates that constants declared in enum stubs exist in reflection.
-     */
-    case ENUM_CONSTANTS = 'EnumConstantsCheck';
-
-    /**
-     * Validates that the visibility (public/protected/private) of constants in class stubs matches reflection.
+     * Validates that the visibility (public/protected/private) of constants in stubs matches reflection.
+     * Reused for classes, interfaces and enums via EntityTypeConfig; the check
+     * reports this name for all three (see CLASS_CONSTANTS).
      */
     case CLASS_CONSTANTS_VISIBILITY = 'ClassConstantsVisibilityCheck';
 
     /**
-     * Validates that the visibility of constants in enum stubs matches reflection.
-     */
-    case ENUM_CONSTANTS_VISIBILITY = 'EnumConstantsVisibilityCheck';
-
-    /**
-     * Validates that the visibility of constants in interface stubs matches reflection.
-     */
-    case INTERFACE_CONSTANTS_VISIBILITY = 'InterfaceConstantsVisibilityCheck';
-
-    /**
-     * Validates that the values of constants in class stubs match reflection.
+     * Validates that the values of constants in stubs match reflection.
+     * Reused for classes, interfaces and enums via EntityTypeConfig; the check
+     * reports this name for all three (see CLASS_CONSTANTS).
      * Value comparison is limited to the latest PHP version to avoid false positives.
      */
     case CLASS_CONSTANTS_VALUE = 'ClassConstantsValueCheck';
-
-    /**
-     * Validates that the values of constants in interface stubs match reflection.
-     * Value comparison is limited to the latest PHP version to avoid false positives.
-     */
-    case INTERFACE_CONSTANTS_VALUE = 'InterfaceConstantsValueCheck';
-
-    /**
-     * Validates that the values of constants in enum stubs match reflection.
-     * Value comparison is limited to the latest PHP version to avoid false positives.
-     */
-    case ENUM_CONSTANTS_VALUE = 'EnumConstantsValueCheck';
 
     /**
      * Validates that the `readonly` modifier on properties in stubs matches reflection.
@@ -299,6 +290,14 @@ enum CheckType: string
     case PHPDOC_VERSION_FORMAT = 'PhpDocVersionFormatCheck';
 
     /**
+     * Validates that a phpDoc comment declares at most one return tag.
+     * A second return is silently discarded by every consumer (the stub parser
+     * keeps the first one), so a duplicate looks applied while having no effect.
+     * Used by PhpDocSingleReturnCheck for functions, classes, interfaces, and enums.
+     */
+    case PHPDOC_SINGLE_RETURN = 'PhpDocSingleReturnCheck';
+
+    /**
      * Validates that every @link URL in phpDoc comments uses the https scheme
      * and, when CHECK_LINKS=true, that the URL is reachable (not a dead link).
      * Only entries starting with "http://" or "https://" are examined; plain
@@ -323,4 +322,13 @@ enum CheckType: string
      * Used by FunctionParameterDeprecationCheck and ClassMethodsParameterDeprecationCheck.
      */
     case PARAMETER_DEPRECATION = 'ParameterDeprecationCheck';
+
+    /**
+     * Validates that the target flags of an attribute class declared via `#[Attribute(...)]`
+     * in stubs match reflection (e.g. that TARGET_CLASS_CONSTANT is present when the attribute
+     * may be applied to class constants). Attributes are declared without version awareness,
+     * so the comparison is limited to the latest PHP version.
+     * Used by ClassAttributeTargetsCheck.
+     */
+    case CLASS_ATTRIBUTE_TARGETS = 'ClassAttributeTargetsCheck';
 }

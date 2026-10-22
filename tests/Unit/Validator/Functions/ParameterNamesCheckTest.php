@@ -110,7 +110,7 @@ class ParameterNamesCheckTest extends CheckTestCase
 
     public function testFunctionNotFoundInStubsSilentlySucceeds(): void
     {
-        // Stub not found — FunctionExistsCheck's responsibility; silently skip
+        // Stub not found — EntityExistsCheck's responsibility; silently skip
         $functionName = 'missing_function';
         $reflectionFunction = $this->createMockFunction($functionName);
 
@@ -304,7 +304,7 @@ class ParameterNamesCheckTest extends CheckTestCase
         $reflectionFunction = $this->createMockFunction($functionName, [$reflParam]);
 
         $stubParamFixed = $this->createMockParameter('vals', null, null, '7.4');
-        $stubParamVariadic = new \StubTests\Framework\Parsers\Model\PHPParameter('vals');
+        $stubParamVariadic = new \StubTests\Framework\Model\PHPParameter('vals');
         $stubParamVariadic->setIsVariadic(true);
 
         $stubFunction = $this->createMockFunction($functionName, [$stubParamFixed, $stubParamVariadic]);

@@ -2,8 +2,11 @@
 
 namespace StubTests\Framework\Validator\Classes\Methods;
 
-use StubTests\Framework\Parsers\Model\PHPMethod;
-use StubTests\Framework\Validator\AbstractMethodFlagCheck;
+use StubTests\Framework\Validator\AbstractMemberFlagCheck;
+use StubTests\Framework\Validator\Contracts\DescribesMethodMismatch;
+use StubTests\Framework\Validator\Contracts\MemberKind;
+use StubTests\Framework\Model\PHPMethod;
+use StubTests\Framework\Validator\KnownProblems\CheckType;
 use StubTests\Framework\Validator\Services\ParameterCountComparator;
 
 /**
@@ -19,9 +22,11 @@ use StubTests\Framework\Validator\Services\ParameterCountComparator;
  *    (PhpStormStubsElementAvailable `from`/`to` → sinceVersion/removedVersion)
  *    and the resulting count is compared with the reflection count.
  *
- * Parameter version filtering uses inclusive boundaries for removedVersion (`<=`),
- * consistent with how PhpStormStubsElementAvailable `to` is interpreted elsewhere
- * (e.g. `to: '7.1'` means the parameter is still available in PHP 7.1).
+ * Parameter version filtering compares removedVersion **exclusively** (`phpVersion <
+ * removedVersion`), per StubsMetadata::isAvailableIn(). The inclusive reading belongs to
+ * the attribute, not to removedVersion: DefaultAvailableVersionParser converts
+ * `to: '7.1'` into `removedVersion = '7.2'`, so the parameter is still available in
+ * PHP 7.1 even though the comparison itself is exclusive.
  *
  * Parameters are deduplicated by name after version filtering. When a version-bounded
  * placeholder and a variadic share the same name (e.g. a `to: '7.4'` placeholder $vars
@@ -34,16 +39,21 @@ use StubTests\Framework\Validator\Services\ParameterCountComparator;
  * - method-level: EntityType::METHOD + '\ClassName::methodName' + 'ParametersCountCheck'
  *   → skips only that specific mismatch.
  */
-class ClassMethodsParametersCountCheck extends AbstractMethodFlagCheck
+class ClassMethodsParametersCountCheck extends AbstractMemberFlagCheck implements DescribesMethodMismatch
 {
-    protected function getCheckName(): string
+    protected function memberKind(): MemberKind
     {
-        return 'ParametersCountCheck';
+        return MemberKind::METHOD;
     }
 
-    protected function describeMismatch(
+    protected function getCheckName(): CheckType
+    {
+        return CheckType::PARAMETERS_COUNT;
+    }
+
+    public function describeMethodMismatch(
         string $methodEntityId,
-        mixed $reflMethod,
+        PHPMethod $reflMethod,
         PHPMethod $stubMethod,
         string $phpVersion
     ): ?string {

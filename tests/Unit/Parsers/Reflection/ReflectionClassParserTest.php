@@ -3,11 +3,11 @@
 namespace StubTests\Unit\Parsers\Reflection;
 
 use PHPUnit\Framework\TestCase as BaseTestCase;
-use StubTests\Framework\Parsers\Model\PHPClass;
-use StubTests\Framework\Parsers\Model\PHPClassConstant;
-use StubTests\Framework\Parsers\Model\PHPInterface;
-use StubTests\Framework\Parsers\Model\PHPMethod;
-use StubTests\Framework\Parsers\Model\PHPProperty;
+use StubTests\Framework\Model\PHPClass;
+use StubTests\Framework\Model\PHPClassConstant;
+use StubTests\Framework\Model\PHPInterface;
+use StubTests\Framework\Model\PHPMethod;
+use StubTests\Framework\Model\PHPProperty;
 use StubTests\Framework\Parsers\Reflection\ReflectionClassParser;
 use StubTests\Framework\Parsers\Reflection\Wrappers\AdaptedReflectionClass;
 use StubTests\Framework\Parsers\Reflection\Wrappers\AdaptedReflectionClassConstant;
@@ -74,11 +74,23 @@ class ReflectionClassParserTest extends BaseTestCase
         self::assertFalse(new ReflectionClassParser()->canParse($stubReflectionClass));
     }
 
-    public function testItReturnsCorrectInstance()
+    /**
+     * The declared return type already guarantees the model class, so asserting
+     * `instanceof` could never fail. What is not type-guaranteed — and would be a real
+     * regression if a parser ever memoised its result — is that each call yields its own
+     * model rather than a shared, mutable one.
+     */
+    public function testEachParseReturnsItsOwnClassModel()
     {
         $reflectionMock = $this->getMockBuilder(AdaptedReflectionClass::class)->disableOriginalConstructor()->getMock();
-        $basePHPElement = new ReflectionClassParser()->parse($reflectionMock);
-        self::assertTrue($basePHPElement instanceof PHPClass);
+
+        $parser = new ReflectionClassParser();
+        $first = $parser->parse($reflectionMock);
+        $second = $parser->parse($reflectionMock);
+
+        self::assertNotSame($first, $second);
+        $first->setName('mutated');
+        self::assertNotSame('mutated', $second->getName());
     }
 
     public function testItSetsNullToNameIfNameNotAvailable()

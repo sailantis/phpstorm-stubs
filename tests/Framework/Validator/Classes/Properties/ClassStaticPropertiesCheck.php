@@ -2,8 +2,11 @@
 
 namespace StubTests\Framework\Validator\Classes\Properties;
 
-use StubTests\Framework\Parsers\Model\PHPProperty;
-use StubTests\Framework\Validator\AbstractPropertyFlagCheck;
+use StubTests\Framework\Validator\AbstractMemberFlagCheck;
+use StubTests\Framework\Validator\Contracts\DescribesPropertyMismatch;
+use StubTests\Framework\Validator\Contracts\MemberKind;
+use StubTests\Framework\Model\PHPProperty;
+use StubTests\Framework\Validator\KnownProblems\CheckType;
 
 /**
  * Validates that the `static` modifier on properties in stubs matches reflection.
@@ -23,14 +26,19 @@ use StubTests\Framework\Validator\AbstractPropertyFlagCheck;
  * - property-level: EntityType::PROPERTY + '\ClassName::$propertyName' + 'ClassStaticPropertiesCheck'
  *   → skips only that specific mismatch.
  */
-class ClassStaticPropertiesCheck extends AbstractPropertyFlagCheck
+class ClassStaticPropertiesCheck extends AbstractMemberFlagCheck implements DescribesPropertyMismatch
 {
-    protected function getCheckName(): string
+    protected function memberKind(): MemberKind
     {
-        return 'ClassStaticPropertiesCheck';
+        return MemberKind::PROPERTY;
     }
 
-    protected function describeMismatch(
+    protected function getCheckName(): CheckType
+    {
+        return CheckType::CLASS_STATIC_PROPERTIES;
+    }
+
+    public function describePropertyMismatch(
         string $propertyEntityId,
         PHPProperty $reflProperty,
         PHPProperty $stubProperty,

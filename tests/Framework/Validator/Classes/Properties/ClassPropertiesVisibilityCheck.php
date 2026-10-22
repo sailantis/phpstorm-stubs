@@ -2,8 +2,11 @@
 
 namespace StubTests\Framework\Validator\Classes\Properties;
 
-use StubTests\Framework\Parsers\Model\PHPProperty;
-use StubTests\Framework\Validator\AbstractPropertyFlagCheck;
+use StubTests\Framework\Validator\AbstractMemberFlagCheck;
+use StubTests\Framework\Validator\Contracts\DescribesPropertyMismatch;
+use StubTests\Framework\Validator\Contracts\MemberKind;
+use StubTests\Framework\Model\PHPProperty;
+use StubTests\Framework\Validator\KnownProblems\CheckType;
 
 /**
  * Validates that the visibility (public/protected/private) of properties in stubs matches reflection.
@@ -23,14 +26,19 @@ use StubTests\Framework\Validator\AbstractPropertyFlagCheck;
  * - property-level: EntityType::PROPERTY + '\ClassName::$propertyName' + 'ClassPropertiesVisibilityCheck'
  *   → skips only that specific mismatch.
  */
-class ClassPropertiesVisibilityCheck extends AbstractPropertyFlagCheck
+class ClassPropertiesVisibilityCheck extends AbstractMemberFlagCheck implements DescribesPropertyMismatch
 {
-    protected function getCheckName(): string
+    protected function memberKind(): MemberKind
     {
-        return 'ClassPropertiesVisibilityCheck';
+        return MemberKind::PROPERTY;
     }
 
-    protected function describeMismatch(
+    protected function getCheckName(): CheckType
+    {
+        return CheckType::CLASS_PROPERTIES_VISIBILITY;
+    }
+
+    public function describePropertyMismatch(
         string $propertyEntityId,
         PHPProperty $reflProperty,
         PHPProperty $stubProperty,

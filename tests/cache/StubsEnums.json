@@ -9,7 +9,7 @@
         "duplicates": [],
         "namespace": "\\Dom",
         "phpDoc": null,
-        "sinceVersion": null,
+        "sinceVersion": "8.4",
         "removedVersion": null,
         "cases": [
             "BeforeBegin",
@@ -32,6 +32,7 @@
                 "phpDoc": null,
                 "sinceVersion": null,
                 "removedVersion": null,
+                "deprecatedSinceVersion": null,
                 "returnTypeFromPhpDoc": null,
                 "languageLevelTypes": null,
                 "defaultType": null
@@ -58,7 +59,8 @@
                         "languageLevelTypes": null,
                         "defaultType": null,
                         "sinceVersion": null,
-                        "removedVersion": null
+                        "removedVersion": null,
+                        "deprecatedSinceVersion": null
                     }
                 ],
                 "returnType": "static",
@@ -66,6 +68,7 @@
                 "phpDoc": null,
                 "sinceVersion": null,
                 "removedVersion": null,
+                "deprecatedSinceVersion": null,
                 "returnTypeFromPhpDoc": null,
                 "languageLevelTypes": null,
                 "defaultType": null
@@ -92,7 +95,8 @@
                         "languageLevelTypes": null,
                         "defaultType": null,
                         "sinceVersion": null,
-                        "removedVersion": null
+                        "removedVersion": null,
+                        "deprecatedSinceVersion": null
                     }
                 ],
                 "returnType": "static|null",
@@ -100,14 +104,15 @@
                 "phpDoc": null,
                 "sinceVersion": null,
                 "removedVersion": null,
+                "deprecatedSinceVersion": null,
                 "returnTypeFromPhpDoc": null,
                 "languageLevelTypes": null,
                 "defaultType": null
             }
         ],
         "interfaces": [
-            "BackedEnum",
-            "UnitEnum"
+            "\\BackedEnum",
+            "\\UnitEnum"
         ]
     },
     {
@@ -120,13 +125,15 @@
         "duplicates": [],
         "namespace": "\\Io\\Poll",
         "phpDoc": null,
-        "sinceVersion": null,
+        "sinceVersion": "8.6",
         "removedVersion": null,
         "cases": [
+            "Auto",
+            "Poll",
             "Epoll",
             "Kqueue",
-            "Poll",
-            "Select"
+            "EventPorts",
+            "WSAPoll"
         ],
         "constants": [],
         "methods": [
@@ -143,6 +150,7 @@
                 "phpDoc": null,
                 "sinceVersion": null,
                 "removedVersion": null,
+                "deprecatedSinceVersion": null,
                 "returnTypeFromPhpDoc": null,
                 "languageLevelTypes": null,
                 "defaultType": null
@@ -160,6 +168,7 @@
                 "phpDoc": null,
                 "sinceVersion": null,
                 "removedVersion": null,
+                "deprecatedSinceVersion": null,
                 "returnTypeFromPhpDoc": null,
                 "languageLevelTypes": null,
                 "defaultType": null
@@ -177,13 +186,14 @@
                 "phpDoc": null,
                 "sinceVersion": null,
                 "removedVersion": null,
+                "deprecatedSinceVersion": null,
                 "returnTypeFromPhpDoc": null,
                 "languageLevelTypes": null,
                 "defaultType": null
             }
         ],
         "interfaces": [
-            "UnitEnum"
+            "\\UnitEnum"
         ]
     },
     {
@@ -196,18 +206,21 @@
         "duplicates": [],
         "namespace": "\\Io\\Poll",
         "phpDoc": null,
-        "sinceVersion": null,
+        "sinceVersion": "8.6",
         "removedVersion": null,
         "cases": [
             "Read",
             "Write",
             "Error",
-            "Hangup"
+            "HangUp",
+            "ReadHangUp",
+            "OneShot",
+            "EdgeTriggered"
         ],
         "constants": [],
         "methods": [],
         "interfaces": [
-            "UnitEnum"
+            "\\UnitEnum"
         ]
     },
     {
@@ -220,7 +233,7 @@
         "duplicates": [],
         "namespace": "\\MongoDB\\BSON",
         "phpDoc": null,
-        "sinceVersion": null,
+        "sinceVersion": "2.2.0",
         "removedVersion": null,
         "cases": [
             "Float32",
@@ -241,7 +254,7 @@
         "duplicates": [],
         "namespace": "\\Pcntl",
         "phpDoc": null,
-        "sinceVersion": null,
+        "sinceVersion": "8.4",
         "removedVersion": null,
         "cases": [
             "Background",
@@ -265,13 +278,14 @@
                 "phpDoc": null,
                 "sinceVersion": null,
                 "removedVersion": null,
+                "deprecatedSinceVersion": null,
                 "returnTypeFromPhpDoc": null,
                 "languageLevelTypes": null,
                 "defaultType": null
             }
         ],
         "interfaces": [
-            "UnitEnum"
+            "\\UnitEnum"
         ]
     },
     {
@@ -284,7 +298,7 @@
         "duplicates": [],
         "namespace": "\\",
         "phpDoc": null,
-        "sinceVersion": null,
+        "sinceVersion": "8.4",
         "removedVersion": null,
         "cases": [
             "Get",
@@ -305,6 +319,7 @@
                 "phpDoc": null,
                 "sinceVersion": null,
                 "removedVersion": null,
+                "deprecatedSinceVersion": null,
                 "returnTypeFromPhpDoc": null,
                 "languageLevelTypes": null,
                 "defaultType": null
@@ -331,7 +346,8 @@
                         "languageLevelTypes": null,
                         "defaultType": null,
                         "sinceVersion": null,
-                        "removedVersion": null
+                        "removedVersion": null,
+                        "deprecatedSinceVersion": null
                     }
                 ],
                 "returnType": "static",
@@ -339,6 +355,7 @@
                 "phpDoc": null,
                 "sinceVersion": null,
                 "removedVersion": null,
+                "deprecatedSinceVersion": null,
                 "returnTypeFromPhpDoc": null,
                 "languageLevelTypes": null,
                 "defaultType": null
@@ -365,7 +382,8 @@
                         "languageLevelTypes": null,
                         "defaultType": null,
                         "sinceVersion": null,
-                        "removedVersion": null
+                        "removedVersion": null,
+                        "deprecatedSinceVersion": null
                     }
                 ],
                 "returnType": "static|null",
@@ -373,14 +391,15 @@
                 "phpDoc": null,
                 "sinceVersion": null,
                 "removedVersion": null,
+                "deprecatedSinceVersion": null,
                 "returnTypeFromPhpDoc": null,
                 "languageLevelTypes": null,
                 "defaultType": null
             }
         ],
         "interfaces": [
-            "BackedEnum",
-            "UnitEnum"
+            "\\BackedEnum",
+            "\\UnitEnum"
         ]
     },
     {
@@ -393,7 +412,7 @@
         "duplicates": [],
         "namespace": "\\Random",
         "phpDoc": null,
-        "sinceVersion": null,
+        "sinceVersion": "8.3",
         "removedVersion": null,
         "cases": [
             "ClosedOpen",
@@ -416,13 +435,14 @@
                 "phpDoc": null,
                 "sinceVersion": null,
                 "removedVersion": null,
+                "deprecatedSinceVersion": null,
                 "returnTypeFromPhpDoc": null,
                 "languageLevelTypes": null,
                 "defaultType": null
             }
         ],
         "interfaces": [
-            "UnitEnum"
+            "\\UnitEnum"
         ]
     },
     {
@@ -461,7 +481,7 @@
         "duplicates": [],
         "namespace": "\\",
         "phpDoc": null,
-        "sinceVersion": null,
+        "sinceVersion": "8.4",
         "removedVersion": null,
         "cases": [
             "HalfAwayFromZero",
@@ -488,13 +508,14 @@
                 "phpDoc": null,
                 "sinceVersion": null,
                 "removedVersion": null,
+                "deprecatedSinceVersion": null,
                 "returnTypeFromPhpDoc": null,
                 "languageLevelTypes": null,
                 "defaultType": null
             }
         ],
         "interfaces": [
-            "UnitEnum"
+            "\\UnitEnum"
         ]
     },
     {
@@ -507,7 +528,7 @@
         "duplicates": [],
         "namespace": "\\",
         "phpDoc": null,
-        "sinceVersion": null,
+        "sinceVersion": "8.6",
         "removedVersion": null,
         "cases": [
             "Ascending",
@@ -516,7 +537,7 @@
         "constants": [],
         "methods": [],
         "interfaces": [
-            "UnitEnum"
+            "\\UnitEnum"
         ]
     },
     {
@@ -529,18 +550,92 @@
         "duplicates": [],
         "namespace": "\\",
         "phpDoc": null,
-        "sinceVersion": null,
+        "sinceVersion": "8.6",
         "removedVersion": null,
         "cases": [
             "None",
-            "System",
-            "Wrapper",
-            "Timeout"
+            "Generic",
+            "ReadFailed",
+            "WriteFailed",
+            "SeekFailed",
+            "SeekNotSupported",
+            "FlushFailed",
+            "TruncateFailed",
+            "ConnectFailed",
+            "BindFailed",
+            "ListenFailed",
+            "AcceptFailed",
+            "NotWritable",
+            "NotReadable",
+            "Disabled",
+            "NotFound",
+            "PermissionDenied",
+            "AlreadyExists",
+            "InvalidPath",
+            "PathTooLong",
+            "OpenFailed",
+            "CreateFailed",
+            "DupFailed",
+            "UnlinkFailed",
+            "RenameFailed",
+            "MkdirFailed",
+            "RmdirFailed",
+            "StatFailed",
+            "MetaFailed",
+            "ChmodFailed",
+            "ChownFailed",
+            "CopyFailed",
+            "TouchFailed",
+            "InvalidMode",
+            "InvalidMeta",
+            "ModeNotSupported",
+            "Readonly",
+            "RecursionDetected",
+            "NotImplemented",
+            "NoOpener",
+            "PersistentNotSupported",
+            "WrapperNotFound",
+            "WrapperDisabled",
+            "ProtocolUnsupported",
+            "WrapperRegistrationFailed",
+            "WrapperUnregistrationFailed",
+            "WrapperRestorationFailed",
+            "FilterNotFound",
+            "FilterFailed",
+            "CastFailed",
+            "CastNotSupported",
+            "MakeSeekableFailed",
+            "BufferedDataLost",
+            "NetworkSendFailed",
+            "NetworkRecvFailed",
+            "SslNotSupported",
+            "ResumptionFailed",
+            "SocketPathTooLong",
+            "OobNotSupported",
+            "ProtocolError",
+            "InvalidUrl",
+            "InvalidResponse",
+            "InvalidHeader",
+            "InvalidParam",
+            "RedirectLimit",
+            "AuthFailed",
+            "TimeOut",
+            "ArchivingFailed",
+            "EncodingFailed",
+            "DecodingFailed",
+            "InvalidFormat",
+            "AllocationFailed",
+            "TemporaryFileFailed",
+            "LockFailed",
+            "LockNotSupported",
+            "UserspaceNotImplemented",
+            "UserspaceInvalidReturn",
+            "UserspaceCallFailed"
         ],
         "constants": [],
         "methods": [],
         "interfaces": [
-            "UnitEnum"
+            "\\UnitEnum"
         ]
     },
     {
@@ -553,17 +648,17 @@
         "duplicates": [],
         "namespace": "\\",
         "phpDoc": null,
-        "sinceVersion": null,
+        "sinceVersion": "8.6",
         "removedVersion": null,
         "cases": [
-            "Silent",
-            "Warning",
-            "Exception"
+            "Error",
+            "Exception",
+            "Silent"
         ],
         "constants": [],
         "methods": [],
         "interfaces": [
-            "UnitEnum"
+            "\\UnitEnum"
         ]
     },
     {
@@ -576,17 +671,19 @@
         "duplicates": [],
         "namespace": "\\",
         "phpDoc": null,
-        "sinceVersion": null,
+        "sinceVersion": "8.6",
         "removedVersion": null,
         "cases": [
+            "Auto",
             "None",
-            "Last",
+            "NonTerminating",
+            "Terminating",
             "All"
         ],
         "constants": [],
         "methods": [],
         "interfaces": [
-            "UnitEnum"
+            "\\UnitEnum"
         ]
     },
     {
@@ -599,18 +696,18 @@
         "duplicates": [],
         "namespace": "\\Uri\\Rfc3986",
         "phpDoc": null,
-        "sinceVersion": null,
+        "sinceVersion": "8.6",
         "removedVersion": null,
         "cases": [
-            "RegName",
-            "Ipv4",
-            "Ipv6",
-            "IpvFuture"
+            "IpV4",
+            "IpV6",
+            "IpVFuture",
+            "RegisteredName"
         ],
         "constants": [],
         "methods": [],
         "interfaces": [
-            "UnitEnum"
+            "\\UnitEnum"
         ]
     },
     {
@@ -623,16 +720,18 @@
         "duplicates": [],
         "namespace": "\\Uri\\Rfc3986",
         "phpDoc": null,
-        "sinceVersion": null,
+        "sinceVersion": "8.6",
         "removedVersion": null,
         "cases": [
-            "Absolute",
-            "Relative"
+            "AbsolutePathReference",
+            "RelativePathReference",
+            "NetworkPathReference",
+            "Uri"
         ],
         "constants": [],
         "methods": [],
         "interfaces": [
-            "UnitEnum"
+            "\\UnitEnum"
         ]
     },
     {
@@ -645,7 +744,7 @@
         "duplicates": [],
         "namespace": "\\Uri",
         "phpDoc": null,
-        "sinceVersion": null,
+        "sinceVersion": "8.5",
         "removedVersion": null,
         "cases": [
             "IncludeFragment",
@@ -666,13 +765,14 @@
                 "phpDoc": null,
                 "sinceVersion": null,
                 "removedVersion": null,
+                "deprecatedSinceVersion": null,
                 "returnTypeFromPhpDoc": null,
                 "languageLevelTypes": null,
                 "defaultType": null
             }
         ],
         "interfaces": [
-            "UnitEnum"
+            "\\UnitEnum"
         ]
     },
     {
@@ -685,19 +785,49 @@
         "duplicates": [],
         "namespace": "\\Uri\\WhatWg",
         "phpDoc": null,
-        "sinceVersion": null,
+        "sinceVersion": "8.6",
         "removedVersion": null,
         "cases": [
+            "IpV4",
+            "IpV6",
             "Domain",
-            "Ipv4",
-            "Ipv6",
             "Opaque",
             "Empty"
         ],
         "constants": [],
         "methods": [],
         "interfaces": [
-            "UnitEnum"
+            "\\UnitEnum"
+        ]
+    },
+    {
+        "_type": "PHPEnum",
+        "name": "UrlPercentEncodingMode",
+        "id": "\\Uri\\WhatWg\\UrlPercentEncodingMode",
+        "isFinal": false,
+        "isReadonly": false,
+        "sourcePath": "uri/uri.php",
+        "duplicates": [],
+        "namespace": "\\Uri\\WhatWg",
+        "phpDoc": null,
+        "sinceVersion": "8.6",
+        "removedVersion": null,
+        "cases": [
+            "Username",
+            "Password",
+            "OpaqueHost",
+            "Path",
+            "OpaquePath",
+            "PathSegment",
+            "Query",
+            "SpecialQuery",
+            "FormQuery",
+            "Fragment"
+        ],
+        "constants": [],
+        "methods": [],
+        "interfaces": [
+            "\\UnitEnum"
         ]
     },
     {
@@ -710,7 +840,7 @@
         "duplicates": [],
         "namespace": "\\Uri\\WhatWg",
         "phpDoc": null,
-        "sinceVersion": null,
+        "sinceVersion": "8.5",
         "removedVersion": null,
         "cases": [
             "DomainToAscii",
@@ -758,13 +888,14 @@
                 "phpDoc": null,
                 "sinceVersion": null,
                 "removedVersion": null,
+                "deprecatedSinceVersion": null,
                 "returnTypeFromPhpDoc": null,
                 "languageLevelTypes": null,
                 "defaultType": null
             }
         ],
         "interfaces": [
-            "UnitEnum"
+            "\\UnitEnum"
         ]
     }
 ]

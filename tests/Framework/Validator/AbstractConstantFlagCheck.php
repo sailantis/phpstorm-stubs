@@ -2,9 +2,10 @@
 
 namespace StubTests\Framework\Validator;
 
-use StubTests\Framework\Parsers\Model\PHPClassConstant;
-use StubTests\Framework\Parsers\StubDataQueryInterface;
+use StubTests\Framework\Model\PHPClassConstant;
+use StubTests\Framework\Storage\StubDataQueryInterface;
 use StubTests\Framework\Validator\Contracts\CheckResultSet;
+use StubTests\Framework\Validator\KnownProblems\CheckType;
 
 /**
  * Base class for checks that compare a single attribute (e.g. visibility) on class/interface/enum
@@ -21,7 +22,7 @@ use StubTests\Framework\Validator\Contracts\CheckResultSet;
  */
 abstract class AbstractConstantFlagCheck extends AbstractClassCheck
 {
-    abstract protected function getCheckName(): string;
+    abstract protected function getCheckName(): CheckType;
 
     /**
      * Compare a single attribute on the reflection and stub constant.
@@ -42,6 +43,15 @@ abstract class AbstractConstantFlagCheck extends AbstractClassCheck
     public function run(StubDataQueryInterface $stubs, string $entityId, string $phpVersion): CheckResultSet
     {
         $results = new CheckResultSet();
+
+        // A version the subclass does not support has nothing to compare, so bail out before
+        // building the reflection constant map (which includes every inherited constant) and
+        // doing a registry lookup per stub constant. ValidatorTestBase already fails loudly on a
+        // registration whose range exceeds supports(), so this only shortcuts direct callers.
+        if (!$this->supports($phpVersion)) {
+            $results->addSuccess($entityId);
+            return $results;
+        }
 
         if ($this->skipWithKnownProblem($results, $this->getEntityType(), $entityId, $this->getCheckName(), $phpVersion)) {
             return $results;

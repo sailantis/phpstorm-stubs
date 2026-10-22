@@ -6,7 +6,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use StubTests\Framework\Runner\PhpVersions;
 use StubTests\Framework\Validator\Contracts\EntityTypeConfig;
 use StubTests\Framework\Validator\Enums\EnumCasesCheck;
-use StubTests\Framework\Validator\Enums\EnumInterfacesCheck;
+use StubTests\Framework\Validator\Classes\ClassInterfacesCheck;
 use StubTests\Framework\Validator\EntityExistsCheck;
 use StubTests\Framework\Validator\EntityNamespaceCheck;
 use StubTests\Framework\Validator\Classes\ClassFinalCheck;
@@ -27,7 +27,7 @@ use StubTests\Framework\Validator\Classes\Constants\ClassConstantsCheck;
 use StubTests\Framework\Validator\Classes\Constants\ClassConstantsValueCheck;
 use StubTests\Framework\Validator\Classes\Constants\ClassConstantsVisibilityCheck;
 use StubTests\Framework\Validator\Classes\Methods\ClassMethodsPhpDocConformsSignatureCheck;
-use StubTests\Framework\Parsers\StubDataQueryInterface;
+use StubTests\Framework\Storage\StubDataQueryInterface;
 use StubTests\Framework\Validator\Contracts\CheckDescriptor;
 
 /**
@@ -64,7 +64,7 @@ class EnumValidatorTest extends ValidatorTestBase
             'checkEnumCases' => new CheckDescriptor(EnumCasesCheck::class, PhpVersions::PHP_8_1, PhpVersions::LATEST, 'Enum {entityId} cases check failed in PHP {phpVersion}'),
             'checkEnumExists' => new CheckDescriptor(EntityExistsCheck::class, PhpVersions::PHP_8_1, PhpVersions::LATEST, 'Enum {entityId} exists in PHP {phpVersion} but not in stubs', $e),
             'checkEnumNamespace' => new CheckDescriptor(EntityNamespaceCheck::class, PhpVersions::PHP_8_1, PhpVersions::LATEST, 'Enum {entityId} namespace validation failed in PHP {phpVersion}', $e),
-            'checkEnumInterfaces' => new CheckDescriptor(EnumInterfacesCheck::class, PhpVersions::PHP_8_1, PhpVersions::LATEST, 'Enum {entityId} interfaces check failed in PHP {phpVersion}'),
+            'checkEnumInterfaces' => new CheckDescriptor(ClassInterfacesCheck::class, PhpVersions::PHP_8_1, PhpVersions::LATEST, 'Enum {entityId} interfaces check failed in PHP {phpVersion}', $e),
 
             // Config-driven checks (using Class checks with EntityTypeConfig::forEnum())
             'checkEnumMethodsExist' => new CheckDescriptor(ClassMethodsExistCheck::class, PhpVersions::PHP_8_1, PhpVersions::LATEST, 'Enum {entityId} methods check failed in PHP {phpVersion}', $e),
@@ -80,7 +80,9 @@ class EnumValidatorTest extends ValidatorTestBase
             'checkEnumMethodsOptionalParameters' => new CheckDescriptor(ClassMethodsOptionalParametersCheck::class, PhpVersions::PHP_8_1, PhpVersions::LATEST, 'Enum {entityId} methods optional parameters check failed in PHP {phpVersion}', $e),
             'checkEnumConstants' => new CheckDescriptor(ClassConstantsCheck::class, PhpVersions::PHP_8_1, PhpVersions::LATEST, 'Enum {entityId} constants check failed in PHP {phpVersion}', $e),
             'checkEnumConstantsVisibility' => new CheckDescriptor(ClassConstantsVisibilityCheck::class, PhpVersions::PHP_8_1, PhpVersions::LATEST, 'Enum {entityId} constants visibility check failed in PHP {phpVersion}', $e),
-            'checkEnumConstantsValue' => new CheckDescriptor(ClassConstantsValueCheck::class, PhpVersions::PHP_8_1, PhpVersions::LATEST, 'Enum {entityId} constants value check failed in PHP {phpVersion}', $e),
+            // Constant values are compared against reflection at the latest version only, so the
+            // range matches ClassConstantsValueCheck::supports() rather than advertising 8.1+.
+            'checkEnumConstantsValue' => new CheckDescriptor(ClassConstantsValueCheck::class, PhpVersions::LATEST, PhpVersions::LATEST, 'Enum {entityId} constants value check failed in PHP {phpVersion}', $e),
             'checkEnumMethodsParameterNames' => new CheckDescriptor(ClassMethodsParameterNamesCheck::class, PhpVersions::PHP_8_1, PhpVersions::LATEST, 'Enum {entityId} methods parameter names check failed in PHP {phpVersion}', $e),
             'checkEnumMethodsTentativeReturnType' => new CheckDescriptor(ClassMethodsTentativeReturnTypeCheck::class, PhpVersions::PHP_8_1, PhpVersions::LATEST, 'Enum {entityId} methods tentative return type check failed in PHP {phpVersion}', $e),
             'checkEnumMethodsParameterDefaultValue' => new CheckDescriptor(ClassMethodsParameterDefaultValueCheck::class, PhpVersions::LATEST, PhpVersions::LATEST, 'Enum {entityId} methods parameter default value check failed in PHP {phpVersion}', $e),

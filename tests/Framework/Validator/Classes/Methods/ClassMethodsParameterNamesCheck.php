@@ -2,8 +2,11 @@
 
 namespace StubTests\Framework\Validator\Classes\Methods;
 
-use StubTests\Framework\Parsers\Model\PHPMethod;
-use StubTests\Framework\Validator\AbstractMethodFlagCheck;
+use StubTests\Framework\Validator\AbstractMemberFlagCheck;
+use StubTests\Framework\Validator\Contracts\DescribesMethodMismatch;
+use StubTests\Framework\Validator\Contracts\MemberKind;
+use StubTests\Framework\Model\PHPMethod;
+use StubTests\Framework\Validator\KnownProblems\CheckType;
 use StubTests\Framework\Validator\Services\ParameterNamesComparator;
 
 /**
@@ -21,22 +24,27 @@ use StubTests\Framework\Validator\Services\ParameterNamesComparator;
  * - method-level: EntityType::METHOD + '\ClassName::methodName' + 'ParameterNamesCheck'
  *   → skips only that specific method.
  */
-class ClassMethodsParameterNamesCheck extends AbstractMethodFlagCheck
+class ClassMethodsParameterNamesCheck extends AbstractMemberFlagCheck implements DescribesMethodMismatch
 {
+    protected function memberKind(): MemberKind
+    {
+        return MemberKind::METHOD;
+    }
+
     public function supports(string $phpVersion): bool
     {
         // Named parameters were introduced in PHP 8.0
         return version_compare($phpVersion, '8.0', '>=');
     }
 
-    protected function getCheckName(): string
+    protected function getCheckName(): CheckType
     {
-        return 'ParameterNamesCheck';
+        return CheckType::PARAMETER_NAMES;
     }
 
-    protected function describeMismatch(
+    public function describeMethodMismatch(
         string $methodEntityId,
-        mixed $reflMethod,
+        PHPMethod $reflMethod,
         PHPMethod $stubMethod,
         string $phpVersion
     ): ?string {

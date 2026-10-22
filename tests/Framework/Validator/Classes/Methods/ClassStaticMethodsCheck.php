@@ -2,8 +2,11 @@
 
 namespace StubTests\Framework\Validator\Classes\Methods;
 
-use StubTests\Framework\Parsers\Model\PHPMethod;
-use StubTests\Framework\Validator\AbstractMethodFlagCheck;
+use StubTests\Framework\Validator\AbstractMemberFlagCheck;
+use StubTests\Framework\Validator\Contracts\DescribesMethodMismatch;
+use StubTests\Framework\Validator\Contracts\MemberKind;
+use StubTests\Framework\Model\PHPMethod;
+use StubTests\Framework\Validator\KnownProblems\CheckType;
 
 /**
  * Validates that the `static` modifier on methods in stubs matches reflection.
@@ -23,14 +26,19 @@ use StubTests\Framework\Validator\AbstractMethodFlagCheck;
  * - method-level: EntityType::METHOD + '\ClassName::methodName' + 'ClassStaticMethodsCheck'
  *   → skips only that specific mismatch.
  */
-class ClassStaticMethodsCheck extends AbstractMethodFlagCheck
+class ClassStaticMethodsCheck extends AbstractMemberFlagCheck implements DescribesMethodMismatch
 {
-    protected function getCheckName(): string
+    protected function memberKind(): MemberKind
     {
-        return 'ClassStaticMethodsCheck';
+        return MemberKind::METHOD;
     }
 
-    protected function describeMismatch(string $methodEntityId, mixed $reflMethod, PHPMethod $stubMethod, string $phpVersion): ?string
+    protected function getCheckName(): CheckType
+    {
+        return CheckType::CLASS_STATIC_METHODS;
+    }
+
+    public function describeMethodMismatch(string $methodEntityId, PHPMethod $reflMethod, PHPMethod $stubMethod, string $phpVersion): ?string
     {
         $reflIsStatic = $reflMethod->isStatic();
         $stubIsStatic = $stubMethod->isStatic();

@@ -2,10 +2,11 @@
 
 namespace StubTests\Framework\Validator\Interfaces;
 
-use StubTests\Framework\Parsers\Model\PHPInterface;
-use StubTests\Framework\Parsers\StubDataQueryInterface;
+use StubTests\Framework\Model\PHPInterface;
+use StubTests\Framework\Storage\StubDataQueryInterface;
 use StubTests\Framework\Validator\AbstractClassCheck;
 use StubTests\Framework\Validator\Contracts\CheckResultSet;
+use StubTests\Framework\Validator\KnownProblems\CheckType;
 use StubTests\Framework\Validator\KnownProblems\EntityType;
 
 /**
@@ -40,7 +41,7 @@ class InterfaceParentInterfacesCheck extends AbstractClassCheck
     {
         $results = new CheckResultSet();
 
-        if ($this->skipWithKnownProblem($results, EntityType::INTERFACE_TYPE->value, $entityId, 'InterfaceParentInterfacesCheck', $phpVersion)) {
+        if ($this->skipWithKnownProblem($results, EntityType::INTERFACE_TYPE->value, $entityId, CheckType::INTERFACE_PARENT_INTERFACES, $phpVersion)) {
             return $results;
         }
 

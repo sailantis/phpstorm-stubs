@@ -2,8 +2,11 @@
 
 namespace StubTests\Framework\Validator\Classes\Methods;
 
-use StubTests\Framework\Parsers\Model\PHPMethod;
-use StubTests\Framework\Validator\AbstractMethodFlagCheck;
+use StubTests\Framework\Validator\AbstractMemberFlagCheck;
+use StubTests\Framework\Validator\Contracts\DescribesMethodMismatch;
+use StubTests\Framework\Validator\Contracts\MemberKind;
+use StubTests\Framework\Model\PHPMethod;
+use StubTests\Framework\Validator\KnownProblems\CheckType;
 
 /**
  * Validates that the visibility (public/protected/private) of methods in stubs matches reflection.
@@ -23,14 +26,19 @@ use StubTests\Framework\Validator\AbstractMethodFlagCheck;
  * - method-level: EntityType::METHOD + '\ClassName::methodName' + 'ClassMethodsVisibilityCheck'
  *   → skips only that specific mismatch.
  */
-class ClassMethodsVisibilityCheck extends AbstractMethodFlagCheck
+class ClassMethodsVisibilityCheck extends AbstractMemberFlagCheck implements DescribesMethodMismatch
 {
-    protected function getCheckName(): string
+    protected function memberKind(): MemberKind
     {
-        return 'ClassMethodsVisibilityCheck';
+        return MemberKind::METHOD;
     }
 
-    protected function describeMismatch(string $methodEntityId, mixed $reflMethod, PHPMethod $stubMethod, string $phpVersion): ?string
+    protected function getCheckName(): CheckType
+    {
+        return CheckType::CLASS_METHODS_VISIBILITY;
+    }
+
+    public function describeMethodMismatch(string $methodEntityId, PHPMethod $reflMethod, PHPMethod $stubMethod, string $phpVersion): ?string
     {
         $reflVisibility = $reflMethod->getAccess()?->value ?? 'public';
         $stubVisibility = $stubMethod->getAccess()?->value ?? 'public';

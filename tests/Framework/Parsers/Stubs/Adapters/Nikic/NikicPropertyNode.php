@@ -3,22 +3,23 @@
 namespace StubTests\Framework\Parsers\Stubs\Adapters\Nikic;
 
 use PhpParser\Node\Stmt\Property;
-use PhpParser\Node\Stmt\PropertyProperty;
+use PhpParser\Node\PropertyItem;
 use StubTests\Framework\Parsers\Stubs\Nodes\DocCommentNode;
 use StubTests\Framework\Parsers\Stubs\Nodes\PropertyNode;
 use StubTests\Framework\Parsers\Stubs\Nodes\TypeNode;
 
 /**
- * Adapter for nikic/php-parser PropertyProperty nodes.
+ * Adapter for nikic/php-parser PropertyItem nodes.
  * Implements complete PropertyNode interface.
- * Requires both PropertyProperty (for name) and Property statement (for modifiers/type).
+ * Requires both PropertyItem (for name) and Property statement (for modifiers/type).
  */
 class NikicPropertyNode implements PropertyNode
 {
-    private PropertyProperty $property;
+    use NikicConstExprEvaluatorTrait;
+    private PropertyItem $property;
     private Property $propertyStmt;
 
-    public function __construct(PropertyProperty $property, Property $propertyStmt)
+    public function __construct(PropertyItem $property, Property $propertyStmt)
     {
         $this->property = $property;
         $this->propertyStmt = $propertyStmt;
@@ -80,5 +81,26 @@ class NikicPropertyNode implements PropertyNode
             }
         }
         return $attributes;
+    }
+
+    public function hasDefaultValue(): bool
+    {
+        // An untyped property always has a default (implicit null) even without an
+        // initializer; a typed one only has a default when it is explicitly initialized.
+        // See PropertyNode::hasDefaultValue() for the full truth table.
+        return $this->property->default !== null || $this->propertyStmt->type === null;
+    }
+
+    public function getDefaultValue(): mixed
+    {
+        if ($this->property->default === null) {
+            if ($this->propertyStmt->type === null) {
+                // Untyped, uninitialized: PHP's implicit default.
+                return null;
+            }
+            throw new \RuntimeException('Property has no default value');
+        }
+
+        return self::evaluateConstExpr($this->property->default);
     }
 }

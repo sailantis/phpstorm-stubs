@@ -2,7 +2,7 @@
 
 namespace StubTests\Unit\Validator\Functions;
 
-use StubTests\Framework\Parsers\Model\PHPFunction;
+use StubTests\Framework\Model\PHPFunction;
 use StubTests\Framework\Runner\PhpVersionRange;
 use StubTests\Framework\Runner\PhpVersions;
 use StubTests\Framework\Validator\Functions\FunctionDeprecationCheck;
@@ -33,14 +33,6 @@ class FunctionDeprecationCheckTest extends CheckTestCase
     /**
      * Build a real PHPFunction with the given id and deprecation flag.
      */
-    private function makeFunction(string $id, bool $deprecated = false): PHPFunction
-    {
-        $fn = new PHPFunction();
-        $fn->setId($id);
-        $fn->setName(ltrim($id, '\\'));
-        $fn->setDeprecated($deprecated);
-        return $fn;
-    }
 
     // ── supports() ────────────────────────────────────────────────────────────
 
@@ -90,9 +82,9 @@ class FunctionDeprecationCheckTest extends CheckTestCase
     {
         $id = '\\active_func';
 
-        $provider = $this->createMockReflectionProvider([$this->makeFunction($id, false)]);
+        $provider = $this->createMockReflectionProvider([$this->makeFunction($id, isDeprecated: false)]);
         $stubs = $this->createMockStorageManager();
-        $stubs->method('getFunctions')->willReturn([$this->makeFunction($id, false)]);
+        $stubs->method('getFunctions')->willReturn([$this->makeFunction($id, isDeprecated: false)]);
 
         $result = (new FunctionDeprecationCheck($provider))->run($stubs, $id, '8.0');
 
@@ -104,9 +96,9 @@ class FunctionDeprecationCheckTest extends CheckTestCase
     {
         $id = '\\old_func';
 
-        $provider = $this->createMockReflectionProvider([$this->makeFunction($id, true)]);
+        $provider = $this->createMockReflectionProvider([$this->makeFunction($id, isDeprecated: true)]);
         $stubs = $this->createMockStorageManager();
-        $stubs->method('getFunctions')->willReturn([$this->makeFunction($id, true)]);
+        $stubs->method('getFunctions')->willReturn([$this->makeFunction($id, isDeprecated: true)]);
 
         $result = (new FunctionDeprecationCheck($provider))->run($stubs, $id, '8.1');
 
@@ -120,9 +112,9 @@ class FunctionDeprecationCheckTest extends CheckTestCase
     {
         $id = '\\strftime';
 
-        $provider = $this->createMockReflectionProvider([$this->makeFunction($id, true)]);
+        $provider = $this->createMockReflectionProvider([$this->makeFunction($id, isDeprecated: true)]);
         $stubs = $this->createMockStorageManager();
-        $stubs->method('getFunctions')->willReturn([$this->makeFunction($id, false)]);
+        $stubs->method('getFunctions')->willReturn([$this->makeFunction($id, isDeprecated: false)]);
 
         $result = (new FunctionDeprecationCheck($provider))->run($stubs, $id, '8.1');
 
@@ -132,14 +124,51 @@ class FunctionDeprecationCheckTest extends CheckTestCase
         $this->assertStringContainsString('not marked as deprecated in stubs', $result->getFailures()[$id]);
     }
 
+    // ── Version-aware stub deprecation ────────────────────────────────────────
+
+    public function testStubDeprecationStartingLaterThanTheVersionUnderTestDoesNotSatisfyReflection(): void
+    {
+        // #[Deprecated(since: '8.4')] must read as "not deprecated" on 8.1, so a reflection
+        // deprecation at 8.1 is still an unmet obligation.
+        $id = '\\strftime';
+
+        $provider = $this->createMockReflectionProvider([$this->makeFunction($id, isDeprecated: true)]);
+        $stubs = $this->createMockStorageManager();
+        $stubs->method('getFunctions')->willReturn([
+            $this->makeFunction($id, isDeprecated: true, deprecatedSinceVersion: '8.4'),
+        ]);
+
+        $result = (new FunctionDeprecationCheck($provider))->run($stubs, $id, '8.1');
+
+        $this->assertTrue($result->hasFailures());
+        $this->assertStringContainsString('not marked as deprecated in stubs', $result->getFailures()[$id]);
+    }
+
+    public function testStubDeprecationSatisfiesReflectionFromItsSinceVersionOnwards(): void
+    {
+        // Same stub, now validated at 8.4: the deprecation applies and the sides agree.
+        $id = '\\strftime';
+
+        $provider = $this->createMockReflectionProvider([$this->makeFunction($id, isDeprecated: true)]);
+        $stubs = $this->createMockStorageManager();
+        $stubs->method('getFunctions')->willReturn([
+            $this->makeFunction($id, isDeprecated: true, deprecatedSinceVersion: '8.4'),
+        ]);
+
+        $result = (new FunctionDeprecationCheck($provider))->run($stubs, $id, '8.4');
+
+        $this->assertFalse($result->hasFailures());
+        $this->assertEquals(1, $result->getSuccessCount());
+    }
+
     public function testDeprecatedInStubsButNotInReflectionIsSuccess(): void
     {
         // One-way check: stubs can be more conservative
         $id = '\\legacy_func';
 
-        $provider = $this->createMockReflectionProvider([$this->makeFunction($id, false)]);
+        $provider = $this->createMockReflectionProvider([$this->makeFunction($id, isDeprecated: false)]);
         $stubs = $this->createMockStorageManager();
-        $stubs->method('getFunctions')->willReturn([$this->makeFunction($id, true)]);
+        $stubs->method('getFunctions')->willReturn([$this->makeFunction($id, isDeprecated: true)]);
 
         $result = (new FunctionDeprecationCheck($provider))->run($stubs, $id, '8.0');
 
@@ -153,7 +182,7 @@ class FunctionDeprecationCheckTest extends CheckTestCase
     {
         $id = '\\special_func';
 
-        $knownProblemsProvider = $this->createMock(\StubTests\Framework\Validator\KnownProblems\KnownProblemsProvider::class);
+        $knownProblemsProvider = $this->createStub(\StubTests\Framework\Validator\KnownProblems\KnownProblemsProvider::class);
         $knownProblemsProvider->method('getProblems')->willReturn([
             new ProblemDefinition(
                 entityType: EntityType::FUNCTION,
@@ -169,9 +198,9 @@ class FunctionDeprecationCheckTest extends CheckTestCase
         $registry = KnownProblemsRegistry::getInstance($knownProblemsProvider);
 
         // Mismatch: deprecated in reflection but not in stubs — would normally fail
-        $provider = $this->createMockReflectionProvider([$this->makeFunction($id, true)]);
+        $provider = $this->createMockReflectionProvider([$this->makeFunction($id, isDeprecated: true)]);
         $stubs = $this->createMockStorageManager();
-        $stubs->method('getFunctions')->willReturn([$this->makeFunction($id, false)]);
+        $stubs->method('getFunctions')->willReturn([$this->makeFunction($id, isDeprecated: false)]);
 
         $result = (new FunctionDeprecationCheck($provider, $registry))->run($stubs, $id, '8.0');
 

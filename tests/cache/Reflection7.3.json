@@ -10,7 +10,8 @@
         "properties": [],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -182,56 +183,71 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "string",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "private",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "code",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "file",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "line",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "trace",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "private",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "previous",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "private",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": null,
         "interfaces": [
-            "Throwable"
-        ]
+            "\\Throwable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -447,42 +463,53 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "code",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "file",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "line",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "severity",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": "Exception",
         "interfaces": [
-            "Throwable"
-        ]
+            "\\Throwable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -654,56 +681,71 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "string",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "private",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "code",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "file",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "line",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "trace",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "private",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "previous",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "private",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": null,
         "interfaces": [
-            "Throwable"
-        ]
+            "\\Throwable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -875,35 +917,44 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "code",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "file",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "line",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": "Error",
         "interfaces": [
-            "Throwable"
-        ]
+            "\\Throwable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -1075,35 +1126,44 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "code",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "file",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "line",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": "CompileError",
         "interfaces": [
-            "Throwable"
-        ]
+            "\\Throwable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -1275,35 +1335,44 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "code",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "file",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "line",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": "Error",
         "interfaces": [
-            "Throwable"
-        ]
+            "\\Throwable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -1475,35 +1544,44 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "code",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "file",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "line",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": "TypeError",
         "interfaces": [
-            "Throwable"
-        ]
+            "\\Throwable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -1675,35 +1753,44 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "code",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "file",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "line",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": "Error",
         "interfaces": [
-            "Throwable"
-        ]
+            "\\Throwable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -1875,35 +1962,44 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "code",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "file",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "line",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": "ArithmeticError",
         "interfaces": [
-            "Throwable"
-        ]
+            "\\Throwable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -2075,7 +2171,8 @@
         "properties": [],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -2213,9 +2310,10 @@
         "constants": [],
         "parentClass": null,
         "interfaces": [
-            "Iterator",
-            "Traversable"
-        ]
+            "\\Iterator",
+            "\\Traversable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -2387,35 +2485,44 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "code",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "file",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "line",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": "Exception",
         "interfaces": [
-            "Throwable"
-        ]
+            "\\Throwable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -3007,8 +3114,9 @@
         ],
         "parentClass": null,
         "interfaces": [
-            "DateTimeInterface"
-        ]
+            "\\DateTimeInterface"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -3600,8 +3708,9 @@
         ],
         "parentClass": null,
         "interfaces": [
-            "DateTimeInterface"
-        ]
+            "\\DateTimeInterface"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -3881,7 +3990,8 @@
             }
         ],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -3998,7 +4108,8 @@
         "properties": [],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -4143,8 +4254,9 @@
         ],
         "parentClass": null,
         "interfaces": [
-            "Traversable"
-        ]
+            "\\Traversable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -4157,7 +4269,8 @@
         "properties": [],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -4735,7 +4848,8 @@
         "properties": [],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -4928,7 +5042,8 @@
         "properties": [],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -5055,7 +5170,8 @@
         "properties": [],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -5207,26 +5323,33 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "mime",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "postname",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -5398,35 +5521,44 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "file",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "line",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "code",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": "Exception",
         "interfaces": [
-            "Throwable"
-        ]
+            "\\Throwable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -5463,7 +5595,8 @@
         "properties": [],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -5523,7 +5656,8 @@
         "properties": [],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -5560,7 +5694,8 @@
         "properties": [],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -5620,7 +5755,8 @@
         "properties": [],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -5769,7 +5905,8 @@
         "properties": [],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -6372,7 +6509,8 @@
         "properties": [],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -6385,7 +6523,8 @@
         "properties": [],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -7022,7 +7161,8 @@
         "properties": [],
         "constants": [],
         "parentClass": "DOMNode",
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -8512,7 +8652,8 @@
         "properties": [],
         "constants": [],
         "parentClass": "DOMNode",
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -8561,9 +8702,10 @@
         "constants": [],
         "parentClass": null,
         "interfaces": [
-            "Traversable",
-            "Countable"
-        ]
+            "\\Traversable",
+            "\\Countable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -8772,9 +8914,10 @@
         "constants": [],
         "parentClass": null,
         "interfaces": [
-            "Traversable",
-            "Countable"
-        ]
+            "\\Traversable",
+            "\\Countable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -9547,7 +9690,8 @@
         "properties": [],
         "constants": [],
         "parentClass": "DOMNode",
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -10195,7 +10339,8 @@
         "properties": [],
         "constants": [],
         "parentClass": "DOMNode",
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -11389,7 +11534,8 @@
         "properties": [],
         "constants": [],
         "parentClass": "DOMNode",
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -12253,7 +12399,8 @@
         "properties": [],
         "constants": [],
         "parentClass": "DOMCharacterData",
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -13049,7 +13196,8 @@
         "properties": [],
         "constants": [],
         "parentClass": "DOMCharacterData",
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -13062,7 +13210,8 @@
         "properties": [],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -13087,7 +13236,8 @@
         "properties": [],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -13100,7 +13250,8 @@
         "properties": [],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -13137,7 +13288,8 @@
         "properties": [],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -13150,7 +13302,8 @@
         "properties": [],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -13255,7 +13408,8 @@
         "properties": [],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -14119,7 +14273,8 @@
         "properties": [],
         "constants": [],
         "parentClass": "DOMText",
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -14722,7 +14877,8 @@
         "properties": [],
         "constants": [],
         "parentClass": "DOMNode",
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -15325,7 +15481,8 @@
         "properties": [],
         "constants": [],
         "parentClass": "DOMNode",
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -15928,7 +16085,8 @@
         "properties": [],
         "constants": [],
         "parentClass": "DOMNode",
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -16554,7 +16712,8 @@
         "properties": [],
         "constants": [],
         "parentClass": "DOMNode",
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -17191,7 +17350,8 @@
         "properties": [],
         "constants": [],
         "parentClass": "DOMNode",
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -17251,7 +17411,8 @@
         "properties": [],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -17423,7 +17584,8 @@
         "properties": [],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -17584,7 +17746,8 @@
         "properties": [],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -17609,7 +17772,8 @@
         "properties": [],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -17781,35 +17945,44 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "code",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "file",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "line",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": "Exception",
         "interfaces": [
-            "Throwable"
-        ]
+            "\\Throwable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -17981,35 +18154,44 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "code",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "file",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "line",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": "Exception",
         "interfaces": [
-            "Throwable"
-        ]
+            "\\Throwable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -18181,35 +18363,44 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "code",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "file",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "line",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": "LogicException",
         "interfaces": [
-            "Throwable"
-        ]
+            "\\Throwable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -18381,35 +18572,44 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "code",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "file",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "line",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": "BadFunctionCallException",
         "interfaces": [
-            "Throwable"
-        ]
+            "\\Throwable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -18581,35 +18781,44 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "code",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "file",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "line",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": "LogicException",
         "interfaces": [
-            "Throwable"
-        ]
+            "\\Throwable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -18781,35 +18990,44 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "code",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "file",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "line",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": "LogicException",
         "interfaces": [
-            "Throwable"
-        ]
+            "\\Throwable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -18981,35 +19199,44 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "code",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "file",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "line",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": "LogicException",
         "interfaces": [
-            "Throwable"
-        ]
+            "\\Throwable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -19181,35 +19408,44 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "code",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "file",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "line",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": "LogicException",
         "interfaces": [
-            "Throwable"
-        ]
+            "\\Throwable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -19381,35 +19617,44 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "code",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "file",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "line",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": "Exception",
         "interfaces": [
-            "Throwable"
-        ]
+            "\\Throwable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -19581,35 +19826,44 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "code",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "file",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "line",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": "RuntimeException",
         "interfaces": [
-            "Throwable"
-        ]
+            "\\Throwable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -19781,35 +20035,44 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "code",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "file",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "line",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": "RuntimeException",
         "interfaces": [
-            "Throwable"
-        ]
+            "\\Throwable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -19981,35 +20244,44 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "code",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "file",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "line",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": "RuntimeException",
         "interfaces": [
-            "Throwable"
-        ]
+            "\\Throwable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -20181,35 +20453,44 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "code",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "file",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "line",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": "RuntimeException",
         "interfaces": [
-            "Throwable"
-        ]
+            "\\Throwable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -20381,35 +20662,44 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "code",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "file",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "line",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": "RuntimeException",
         "interfaces": [
-            "Throwable"
-        ]
+            "\\Throwable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -20705,10 +20995,11 @@
         ],
         "parentClass": null,
         "interfaces": [
-            "Iterator",
-            "Traversable",
-            "OuterIterator"
-        ]
+            "\\Iterator",
+            "\\Traversable",
+            "\\OuterIterator"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -20812,10 +21103,11 @@
         "constants": [],
         "parentClass": null,
         "interfaces": [
-            "Iterator",
-            "Traversable",
-            "OuterIterator"
-        ]
+            "\\Iterator",
+            "\\Traversable",
+            "\\OuterIterator"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -20930,10 +21222,11 @@
         "constants": [],
         "parentClass": "IteratorIterator",
         "interfaces": [
-            "OuterIterator",
-            "Traversable",
-            "Iterator"
-        ]
+            "\\OuterIterator",
+            "\\Traversable",
+            "\\Iterator"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -21070,11 +21363,12 @@
         "constants": [],
         "parentClass": "FilterIterator",
         "interfaces": [
-            "Iterator",
-            "Traversable",
-            "OuterIterator",
-            "RecursiveIterator"
-        ]
+            "\\Iterator",
+            "\\Traversable",
+            "\\OuterIterator",
+            "\\RecursiveIterator"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -21200,10 +21494,11 @@
         "constants": [],
         "parentClass": "FilterIterator",
         "interfaces": [
-            "Iterator",
-            "Traversable",
-            "OuterIterator"
-        ]
+            "\\Iterator",
+            "\\Traversable",
+            "\\OuterIterator"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -21351,11 +21646,12 @@
         "constants": [],
         "parentClass": "CallbackFilterIterator",
         "interfaces": [
-            "OuterIterator",
-            "Traversable",
-            "Iterator",
-            "RecursiveIterator"
-        ]
+            "\\OuterIterator",
+            "\\Traversable",
+            "\\Iterator",
+            "\\RecursiveIterator"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -21492,11 +21788,12 @@
         "constants": [],
         "parentClass": "RecursiveFilterIterator",
         "interfaces": [
-            "RecursiveIterator",
-            "OuterIterator",
-            "Traversable",
-            "Iterator"
-        ]
+            "\\RecursiveIterator",
+            "\\OuterIterator",
+            "\\Traversable",
+            "\\Iterator"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -21656,10 +21953,11 @@
         "constants": [],
         "parentClass": "IteratorIterator",
         "interfaces": [
-            "OuterIterator",
-            "Traversable",
-            "Iterator"
-        ]
+            "\\OuterIterator",
+            "\\Traversable",
+            "\\Iterator"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -21992,12 +22290,13 @@
         ],
         "parentClass": "IteratorIterator",
         "interfaces": [
-            "OuterIterator",
-            "Traversable",
-            "Iterator",
-            "ArrayAccess",
-            "Countable"
-        ]
+            "\\OuterIterator",
+            "\\Traversable",
+            "\\Iterator",
+            "\\ArrayAccess",
+            "\\Countable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -22352,13 +22651,14 @@
         ],
         "parentClass": "CachingIterator",
         "interfaces": [
-            "Countable",
-            "ArrayAccess",
-            "Iterator",
-            "Traversable",
-            "OuterIterator",
-            "RecursiveIterator"
-        ]
+            "\\Countable",
+            "\\ArrayAccess",
+            "\\Iterator",
+            "\\Traversable",
+            "\\OuterIterator",
+            "\\RecursiveIterator"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -22462,10 +22762,11 @@
         "constants": [],
         "parentClass": "IteratorIterator",
         "interfaces": [
-            "OuterIterator",
-            "Traversable",
-            "Iterator"
-        ]
+            "\\OuterIterator",
+            "\\Traversable",
+            "\\Iterator"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -22602,10 +22903,11 @@
         "constants": [],
         "parentClass": "IteratorIterator",
         "interfaces": [
-            "OuterIterator",
-            "Traversable",
-            "Iterator"
-        ]
+            "\\OuterIterator",
+            "\\Traversable",
+            "\\Iterator"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -22709,10 +23011,11 @@
         "constants": [],
         "parentClass": "IteratorIterator",
         "interfaces": [
-            "OuterIterator",
-            "Traversable",
-            "Iterator"
-        ]
+            "\\OuterIterator",
+            "\\Traversable",
+            "\\Iterator"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -22986,7 +23289,9 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [
@@ -23035,10 +23340,11 @@
         ],
         "parentClass": "FilterIterator",
         "interfaces": [
-            "Iterator",
-            "Traversable",
-            "OuterIterator"
-        ]
+            "\\Iterator",
+            "\\Traversable",
+            "\\OuterIterator"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -23334,7 +23640,9 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [
@@ -23383,11 +23691,12 @@
         ],
         "parentClass": "RegexIterator",
         "interfaces": [
-            "OuterIterator",
-            "Traversable",
-            "Iterator",
-            "RecursiveIterator"
-        ]
+            "\\OuterIterator",
+            "\\Traversable",
+            "\\Iterator",
+            "\\RecursiveIterator"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -23457,9 +23766,10 @@
         "constants": [],
         "parentClass": null,
         "interfaces": [
-            "Iterator",
-            "Traversable"
-        ]
+            "\\Iterator",
+            "\\Traversable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -23904,10 +24214,11 @@
         ],
         "parentClass": "RecursiveIteratorIterator",
         "interfaces": [
-            "OuterIterator",
-            "Traversable",
-            "Iterator"
-        ]
+            "\\OuterIterator",
+            "\\Traversable",
+            "\\Iterator"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -24354,12 +24665,13 @@
         ],
         "parentClass": null,
         "interfaces": [
-            "IteratorAggregate",
-            "Traversable",
-            "ArrayAccess",
-            "Serializable",
-            "Countable"
-        ]
+            "\\IteratorAggregate",
+            "\\Traversable",
+            "\\ArrayAccess",
+            "\\Serializable",
+            "\\Countable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -24805,13 +25117,14 @@
         ],
         "parentClass": null,
         "interfaces": [
-            "Iterator",
-            "Traversable",
-            "ArrayAccess",
-            "SeekableIterator",
-            "Serializable",
-            "Countable"
-        ]
+            "\\Iterator",
+            "\\Traversable",
+            "\\ArrayAccess",
+            "\\SeekableIterator",
+            "\\Serializable",
+            "\\Countable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -25285,14 +25598,15 @@
         ],
         "parentClass": "ArrayIterator",
         "interfaces": [
-            "Countable",
-            "Serializable",
-            "SeekableIterator",
-            "ArrayAccess",
-            "Traversable",
-            "Iterator",
-            "RecursiveIterator"
-        ]
+            "\\Countable",
+            "\\Serializable",
+            "\\SeekableIterator",
+            "\\ArrayAccess",
+            "\\Traversable",
+            "\\Iterator",
+            "\\RecursiveIterator"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -25742,7 +26056,8 @@
         "properties": [],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -26282,10 +26597,11 @@
         "constants": [],
         "parentClass": "SplFileInfo",
         "interfaces": [
-            "Iterator",
-            "Traversable",
-            "SeekableIterator"
-        ]
+            "\\Iterator",
+            "\\Traversable",
+            "\\SeekableIterator"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -26943,10 +27259,11 @@
         ],
         "parentClass": "DirectoryIterator",
         "interfaces": [
-            "SeekableIterator",
-            "Traversable",
-            "Iterator"
-        ]
+            "\\SeekableIterator",
+            "\\Traversable",
+            "\\Iterator"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -27660,11 +27977,12 @@
         ],
         "parentClass": "FilesystemIterator",
         "interfaces": [
-            "Iterator",
-            "Traversable",
-            "SeekableIterator",
-            "RecursiveIterator"
-        ]
+            "\\Iterator",
+            "\\Traversable",
+            "\\SeekableIterator",
+            "\\RecursiveIterator"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -28333,11 +28651,12 @@
         ],
         "parentClass": "FilesystemIterator",
         "interfaces": [
-            "Iterator",
-            "Traversable",
-            "SeekableIterator",
-            "Countable"
-        ]
+            "\\Iterator",
+            "\\Traversable",
+            "\\SeekableIterator",
+            "\\Countable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -29464,11 +29783,12 @@
         ],
         "parentClass": "SplFileInfo",
         "interfaces": [
-            "RecursiveIterator",
-            "Traversable",
-            "Iterator",
-            "SeekableIterator"
-        ]
+            "\\RecursiveIterator",
+            "\\Traversable",
+            "\\Iterator",
+            "\\SeekableIterator"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -30562,11 +30882,12 @@
         ],
         "parentClass": "SplFileObject",
         "interfaces": [
-            "SeekableIterator",
-            "Iterator",
-            "Traversable",
-            "RecursiveIterator"
-        ]
+            "\\SeekableIterator",
+            "\\Iterator",
+            "\\Traversable",
+            "\\RecursiveIterator"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -30989,12 +31310,13 @@
         ],
         "parentClass": null,
         "interfaces": [
-            "Iterator",
-            "Traversable",
-            "Countable",
-            "ArrayAccess",
-            "Serializable"
-        ]
+            "\\Iterator",
+            "\\Traversable",
+            "\\Countable",
+            "\\ArrayAccess",
+            "\\Serializable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -31451,12 +31773,13 @@
         ],
         "parentClass": "SplDoublyLinkedList",
         "interfaces": [
-            "Serializable",
-            "ArrayAccess",
-            "Countable",
-            "Traversable",
-            "Iterator"
-        ]
+            "\\Serializable",
+            "\\ArrayAccess",
+            "\\Countable",
+            "\\Traversable",
+            "\\Iterator"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -31879,12 +32202,13 @@
         ],
         "parentClass": "SplDoublyLinkedList",
         "interfaces": [
-            "Serializable",
-            "ArrayAccess",
-            "Countable",
-            "Traversable",
-            "Iterator"
-        ]
+            "\\Serializable",
+            "\\ArrayAccess",
+            "\\Countable",
+            "\\Traversable",
+            "\\Iterator"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -32054,10 +32378,11 @@
         "constants": [],
         "parentClass": null,
         "interfaces": [
-            "Iterator",
-            "Traversable",
-            "Countable"
-        ]
+            "\\Iterator",
+            "\\Traversable",
+            "\\Countable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -32250,10 +32575,11 @@
         "constants": [],
         "parentClass": "SplHeap",
         "interfaces": [
-            "Countable",
-            "Traversable",
-            "Iterator"
-        ]
+            "\\Countable",
+            "\\Traversable",
+            "\\Iterator"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -32446,10 +32772,11 @@
         "constants": [],
         "parentClass": "SplHeap",
         "interfaces": [
-            "Countable",
-            "Traversable",
-            "Iterator"
-        ]
+            "\\Countable",
+            "\\Traversable",
+            "\\Iterator"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -32706,10 +33033,11 @@
         ],
         "parentClass": null,
         "interfaces": [
-            "Iterator",
-            "Traversable",
-            "Countable"
-        ]
+            "\\Iterator",
+            "\\Traversable",
+            "\\Countable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -33006,11 +33334,12 @@
         "constants": [],
         "parentClass": null,
         "interfaces": [
-            "Iterator",
-            "Traversable",
-            "ArrayAccess",
-            "Countable"
-        ]
+            "\\Iterator",
+            "\\Traversable",
+            "\\ArrayAccess",
+            "\\Countable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -33434,12 +33763,13 @@
         "constants": [],
         "parentClass": null,
         "interfaces": [
-            "Countable",
-            "Iterator",
-            "Traversable",
-            "Serializable",
-            "ArrayAccess"
-        ]
+            "\\Countable",
+            "\\Iterator",
+            "\\Traversable",
+            "\\Serializable",
+            "\\ArrayAccess"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -33682,9 +34012,10 @@
         ],
         "parentClass": null,
         "interfaces": [
-            "Iterator",
-            "Traversable"
-        ]
+            "\\Iterator",
+            "\\Traversable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -33856,42 +34187,53 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "code",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "file",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "line",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "errorInfo",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": "RuntimeException",
         "interfaces": [
-            "Throwable"
-        ]
+            "\\Throwable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -34873,7 +35215,8 @@
             }
         ],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -35452,14 +35795,17 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": null,
         "interfaces": [
-            "Traversable"
-        ]
+            "\\Traversable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -35472,7 +35818,8 @@
         "properties": [],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -35644,35 +35991,44 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "code",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "file",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "line",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": "Exception",
         "interfaces": [
-            "Throwable"
-        ]
+            "\\Throwable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -35743,7 +36099,8 @@
         "properties": [],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -36068,14 +36425,17 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": null,
         "interfaces": [
-            "Reflector"
-        ]
+            "\\Reflector"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -36514,7 +36874,9 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [
@@ -36527,8 +36889,9 @@
         ],
         "parentClass": "ReflectionFunctionAbstract",
         "interfaces": [
-            "Reflector"
-        ]
+            "\\Reflector"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -36643,7 +37006,8 @@
         "properties": [],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -36959,14 +37323,17 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": null,
         "interfaces": [
-            "Reflector"
-        ]
+            "\\Reflector"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -37024,7 +37391,8 @@
         "properties": [],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -37093,7 +37461,8 @@
         "properties": [],
         "constants": [],
         "parentClass": "ReflectionType",
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -37721,14 +38090,18 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "class",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [
@@ -37771,8 +38144,9 @@
         ],
         "parentClass": "ReflectionFunctionAbstract",
         "interfaces": [
-            "Reflector"
-        ]
+            "\\Reflector"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -38632,7 +39006,9 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [
@@ -38657,8 +39033,9 @@
         ],
         "parentClass": null,
         "interfaces": [
-            "Reflector"
-        ]
+            "\\Reflector"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -39518,7 +39895,9 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [
@@ -39543,8 +39922,9 @@
         ],
         "parentClass": "ReflectionClass",
         "interfaces": [
-            "Reflector"
-        ]
+            "\\Reflector"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -39841,14 +40221,18 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "class",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [
@@ -39879,8 +40263,9 @@
         ],
         "parentClass": null,
         "interfaces": [
-            "Reflector"
-        ]
+            "\\Reflector"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -40086,21 +40471,26 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "class",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": null,
         "interfaces": [
-            "Reflector"
-        ]
+            "\\Reflector"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -40317,14 +40707,17 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": null,
         "interfaces": [
-            "Reflector"
-        ]
+            "\\Reflector"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -40475,14 +40868,17 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": null,
         "interfaces": [
-            "Reflector"
-        ]
+            "\\Reflector"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -40656,9 +41052,10 @@
         "constants": [],
         "parentClass": null,
         "interfaces": [
-            "SessionHandlerInterface",
-            "SessionIdInterface"
-        ]
+            "\\SessionHandlerInterface",
+            "\\SessionIdInterface"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -41091,8 +41488,9 @@
         "constants": [],
         "parentClass": null,
         "interfaces": [
-            "Traversable"
-        ]
+            "\\Traversable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -41602,11 +42000,12 @@
         "constants": [],
         "parentClass": "SimpleXMLElement",
         "interfaces": [
-            "Traversable",
-            "RecursiveIterator",
-            "Iterator",
-            "Countable"
-        ]
+            "\\Traversable",
+            "\\RecursiveIterator",
+            "\\Iterator",
+            "\\Countable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -41619,7 +42018,8 @@
         "properties": [],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -41714,19 +42114,24 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "params",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -41809,7 +42214,8 @@
         "properties": [],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -41981,35 +42387,44 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "code",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "file",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "line",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": "Error",
         "interfaces": [
-            "Throwable"
-        ]
+            "\\Throwable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -42700,7 +43115,8 @@
             }
         ],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -43776,7 +44192,8 @@
         "properties": [],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -43948,35 +44365,44 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "code",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "file",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "line",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": "Exception",
         "interfaces": [
-            "Throwable"
-        ]
+            "\\Throwable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -46039,13 +46465,14 @@
         ],
         "parentClass": "RecursiveDirectoryIterator",
         "interfaces": [
-            "RecursiveIterator",
-            "SeekableIterator",
-            "Traversable",
-            "Iterator",
-            "Countable",
-            "ArrayAccess"
-        ]
+            "\\RecursiveIterator",
+            "\\SeekableIterator",
+            "\\Traversable",
+            "\\Iterator",
+            "\\Countable",
+            "\\ArrayAccess"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -48035,13 +48462,14 @@
         ],
         "parentClass": "RecursiveDirectoryIterator",
         "interfaces": [
-            "RecursiveIterator",
-            "SeekableIterator",
-            "Traversable",
-            "Iterator",
-            "Countable",
-            "ArrayAccess"
-        ]
+            "\\RecursiveIterator",
+            "\\SeekableIterator",
+            "\\Traversable",
+            "\\Iterator",
+            "\\Countable",
+            "\\ArrayAccess"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -48693,7 +49121,8 @@
         "properties": [],
         "constants": [],
         "parentClass": "SplFileInfo",
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -48706,7 +49135,8 @@
         "properties": [],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -49195,7 +49625,8 @@
             }
         ],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -50146,7 +50577,8 @@
             }
         ],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -50318,7 +50750,8 @@
             }
         ],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -50905,7 +51338,8 @@
             }
         ],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -51190,7 +51624,8 @@
         "properties": [],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -51763,7 +52198,8 @@
             }
         ],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -51958,8 +52394,9 @@
         "constants": [],
         "parentClass": null,
         "interfaces": [
-            "Traversable"
-        ]
+            "\\Traversable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -52144,7 +52581,9 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [
@@ -52162,7 +52601,8 @@
             }
         ],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -52784,7 +53224,8 @@
             }
         ],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -54032,7 +54473,8 @@
             }
         ],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -55404,7 +55846,8 @@
             }
         ],
         "parentClass": "IntlCalendar",
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -55656,7 +56099,8 @@
             }
         ],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -55828,35 +56272,44 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "code",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "file",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "line",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": "Exception",
         "interfaces": [
-            "Throwable"
-        ]
+            "\\Throwable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -55926,9 +56379,10 @@
         "constants": [],
         "parentClass": null,
         "interfaces": [
-            "Iterator",
-            "Traversable"
-        ]
+            "\\Iterator",
+            "\\Traversable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -56433,8 +56887,9 @@
         ],
         "parentClass": null,
         "interfaces": [
-            "Traversable"
-        ]
+            "\\Traversable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -57006,8 +57461,9 @@
         ],
         "parentClass": "IntlBreakIterator",
         "interfaces": [
-            "Traversable"
-        ]
+            "\\Traversable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -57523,8 +57979,9 @@
         ],
         "parentClass": "IntlBreakIterator",
         "interfaces": [
-            "Traversable"
-        ]
+            "\\Traversable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -57624,9 +58081,10 @@
         ],
         "parentClass": "IntlIterator",
         "interfaces": [
-            "Traversable",
-            "Iterator"
-        ]
+            "\\Traversable",
+            "\\Iterator"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -58337,7 +58795,8 @@
             }
         ],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -63829,7 +64288,8 @@
             }
         ],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -64001,42 +64461,53 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "file",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "line",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "code",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "sqlstate",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": "RuntimeException",
         "interfaces": [
-            "Throwable"
-        ]
+            "\\Throwable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -64052,47 +64523,60 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "client_version",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "driver_version",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "embedded",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "reconnect",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "report_mode",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -65246,138 +65730,177 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "client_info",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "client_version",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "connect_errno",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "connect_error",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "errno",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "error",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "error_list",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "field_count",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "host_info",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "info",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "insert_id",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "server_info",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "server_version",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "stat",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "sqlstate",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "protocol_version",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "thread_id",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "warning_count",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -65416,26 +65939,33 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "sqlstate",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "errno",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -65689,42 +66219,53 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "field_count",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "lengths",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "num_rows",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "type",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": null,
         "interfaces": [
-            "Traversable"
-        ]
+            "\\Traversable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -66078,75 +66619,96 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "insert_id",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "num_rows",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "param_count",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "field_count",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "errno",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "error",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "error_list",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "sqlstate",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "id",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "public",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -66519,7 +67081,8 @@
         "properties": [],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -66611,7 +67174,8 @@
         "properties": [],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -66886,7 +67450,8 @@
         "properties": [],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -67136,35 +67701,44 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "code",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "file",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "line",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": "Exception",
         "interfaces": [
-            "Throwable"
-        ]
+            "\\Throwable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -67212,7 +67786,8 @@
         "properties": [],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -67293,7 +67868,8 @@
         "properties": [],
         "constants": [],
         "parentClass": null,
-        "interfaces": []
+        "interfaces": [],
+        "attributes": []
     },
     {
         "_type": "PHPClass",
@@ -67465,35 +68041,44 @@
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "code",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "file",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             },
             {
                 "name": "line",
                 "isStatic": false,
                 "isReadonly": false,
                 "accessModifier": "protected",
-                "type": ""
+                "type": "",
+                "hasDefaultValue": false,
+                "defaultValue": null
             }
         ],
         "constants": [],
         "parentClass": "Exception",
         "interfaces": [
-            "Throwable"
-        ]
+            "\\Throwable"
+        ],
+        "attributes": []
     },
     {
         "_type": "PHPInterface",
@@ -67501,7 +68086,8 @@
         "id": "\\Traversable",
         "namespace": "\\",
         "methods": [],
-        "constants": []
+        "constants": [],
+        "parentInterfaces": []
     },
     {
         "_type": "PHPInterface",
@@ -67521,7 +68107,10 @@
                 "hasTentativeReturnType": false
             }
         ],
-        "constants": []
+        "constants": [],
+        "parentInterfaces": [
+            "\\Traversable"
+        ]
     },
     {
         "_type": "PHPInterface",
@@ -67585,7 +68174,10 @@
                 "hasTentativeReturnType": false
             }
         ],
-        "constants": []
+        "constants": [],
+        "parentInterfaces": [
+            "\\Traversable"
+        ]
     },
     {
         "_type": "PHPInterface",
@@ -67697,7 +68289,8 @@
                 "hasTentativeReturnType": false
             }
         ],
-        "constants": []
+        "constants": [],
+        "parentInterfaces": []
     },
     {
         "_type": "PHPInterface",
@@ -67740,7 +68333,8 @@
                 "hasTentativeReturnType": false
             }
         ],
-        "constants": []
+        "constants": [],
+        "parentInterfaces": []
     },
     {
         "_type": "PHPInterface",
@@ -67760,7 +68354,8 @@
                 "hasTentativeReturnType": false
             }
         ],
-        "constants": []
+        "constants": [],
+        "parentInterfaces": []
     },
     {
         "_type": "PHPInterface",
@@ -67857,7 +68452,8 @@
                 "hasTentativeReturnType": false
             }
         ],
-        "constants": []
+        "constants": [],
+        "parentInterfaces": []
     },
     {
         "_type": "PHPInterface",
@@ -68046,7 +68642,8 @@
                 "visibility": "public",
                 "isFinal": false
             }
-        ]
+        ],
+        "parentInterfaces": []
     },
     {
         "_type": "PHPInterface",
@@ -68066,7 +68663,8 @@
                 "hasTentativeReturnType": false
             }
         ],
-        "constants": []
+        "constants": [],
+        "parentInterfaces": []
     },
     {
         "_type": "PHPInterface",
@@ -68152,7 +68750,11 @@
                 "hasTentativeReturnType": false
             }
         ],
-        "constants": []
+        "constants": [],
+        "parentInterfaces": [
+            "\\Iterator",
+            "\\Traversable"
+        ]
     },
     {
         "_type": "PHPInterface",
@@ -68227,7 +68829,11 @@
                 "hasTentativeReturnType": false
             }
         ],
-        "constants": []
+        "constants": [],
+        "parentInterfaces": [
+            "\\Iterator",
+            "\\Traversable"
+        ]
     },
     {
         "_type": "PHPInterface",
@@ -68314,7 +68920,11 @@
                 "hasTentativeReturnType": false
             }
         ],
-        "constants": []
+        "constants": [],
+        "parentInterfaces": [
+            "\\Iterator",
+            "\\Traversable"
+        ]
     },
     {
         "_type": "PHPInterface",
@@ -68346,7 +68956,8 @@
                 "hasTentativeReturnType": false
             }
         ],
-        "constants": []
+        "constants": [],
+        "parentInterfaces": []
     },
     {
         "_type": "PHPInterface",
@@ -68412,7 +69023,8 @@
                 "hasTentativeReturnType": false
             }
         ],
-        "constants": []
+        "constants": [],
+        "parentInterfaces": []
     },
     {
         "_type": "PHPInterface",
@@ -68443,7 +69055,8 @@
                 "hasTentativeReturnType": false
             }
         ],
-        "constants": []
+        "constants": [],
+        "parentInterfaces": []
     },
     {
         "_type": "PHPInterface",
@@ -68600,7 +69213,8 @@
                 "hasTentativeReturnType": false
             }
         ],
-        "constants": []
+        "constants": [],
+        "parentInterfaces": []
     },
     {
         "_type": "PHPInterface",
@@ -68620,7 +69234,8 @@
                 "hasTentativeReturnType": false
             }
         ],
-        "constants": []
+        "constants": [],
+        "parentInterfaces": []
     },
     {
         "_type": "PHPInterface",
@@ -68686,7 +69301,8 @@
                 "hasTentativeReturnType": false
             }
         ],
-        "constants": []
+        "constants": [],
+        "parentInterfaces": []
     },
     {
         "_type": "PHPFunction",
@@ -145061,14 +145677,14 @@
         "_type": "PHPConstant",
         "name": "INF",
         "id": "\\INF",
-        "value": 0,
+        "value": "[float:INF]",
         "namespace": "\\"
     },
     {
         "_type": "PHPConstant",
         "name": "NAN",
         "id": "\\NAN",
-        "value": 0,
+        "value": "[float:NAN]",
         "namespace": "\\"
     },
     {

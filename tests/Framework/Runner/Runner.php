@@ -2,12 +2,13 @@
 
 namespace StubTests\Framework\Runner;
 
-use StubTests\Framework\Parsers\Serializers\Reflection\ReflectionEntitySerializer;
-use StubTests\Framework\Parsers\Serializers\Stubs\StubsEntitySerializer;
+use StubTests\Framework\Storage\StubDataQueryInterface;
+use StubTests\Framework\Serialization\Reflection\ReflectionEntitySerializer;
+use StubTests\Framework\Serialization\Stubs\StubsEntitySerializer;
 use StubTests\Framework\DataProvider\AllStubsDataProvider;
 use StubTests\Framework\DataProvider\CurrentRuntimeReflectionRawDataProvider;
-use StubTests\Framework\Parsers\Hierarchy\ClassHierarchyResolver;
-use StubTests\Framework\Parsers\Hierarchy\InheritDocVersionResolver;
+use StubTests\Framework\Hierarchy\ClassHierarchyResolver;
+use StubTests\Framework\Hierarchy\InheritDocVersionResolver;
 use StubTests\Framework\Parsers\Reflection\AllReflectionParser;
 use StubTests\Framework\Parsers\Stubs\AllStubsParser;
 use StubTests\Framework\Parsers\Stubs\StubClassParser;
@@ -16,19 +17,22 @@ use StubTests\Framework\Parsers\Stubs\StubEnumParser;
 use StubTests\Framework\Parsers\Stubs\StubFunctionParser;
 use StubTests\Framework\Parsers\Stubs\StubInterfaceParser;
 use StubTests\Framework\Parsers\Stubs\StubModernConstantParser;
-use StubTests\Framework\Parsers\Processors\EntityProcessingPipeline;
-use StubTests\Framework\Parsers\Processors\StubsDeduplicationProcessor;
-use StubTests\Framework\Parsers\Storage\DefaultParsedDataStorageManager;
-use StubTests\Framework\Parsers\Storage\JsonParsedDataStorage;
-use StubTests\Framework\Parsers\Storage\MultiFileJsonStorage;
-use StubTests\Framework\Parsers\Storage\ParsedDataStorageManager;
-use StubTests\Framework\Parsers\Storage\PhpDocStorage;
+use StubTests\Framework\Pipeline\EntityProcessingPipelineFactory;
+use StubTests\Framework\Storage\DefaultParsedDataStorageManager;
+use StubTests\Framework\Storage\JsonParsedDataStorage;
+use StubTests\Framework\Storage\MultiFileJsonStorage;
+use StubTests\Framework\Storage\PhpDocStorage;
 
 class Runner
 {
-    /** @var array<string, ParsedDataStorageManager> */
+    /**
+     * Cached stores, held as the concrete type because Runner itself still saves them.
+     * The getters below hand out only the read interface.
+     *
+     * @var array<string, DefaultParsedDataStorageManager>
+     */
     private array $reflectionCache = [];
-    private ?ParsedDataStorageManager $stubsCache = null;
+    private ?DefaultParsedDataStorageManager $stubsCache = null;
     private readonly string $cacheDir;
     private readonly ClassHierarchyResolver $hierarchyResolver;
     private readonly InheritDocVersionResolver $inheritDocResolver;
@@ -43,7 +47,7 @@ class Runner
         $this->inheritDocResolver = $inheritDocResolver ?? new InheritDocVersionResolver();
     }
 
-    public function getReflection(string $phpVersion): ParsedDataStorageManager
+    public function getReflection(string $phpVersion): StubDataQueryInterface
     {
         if (PhpVersions::tryFrom($phpVersion) === null) {
             throw new \InvalidArgumentException("Unknown PHP version '{$phpVersion}'. Valid versions: " . implode(', ', array_map(fn (PhpVersions $v) => $v->value, PhpVersions::cases())));
@@ -66,8 +70,12 @@ class Runner
                 throw new \RuntimeException("Reflection cache file not found: $cacheFilePath. " . "Cannot generate cache for PHP $phpVersion on runtime PHP $runtimeVersion. " . "Run the reflection cache generation script for PHP $phpVersion first.");
             }
 
+            // Must use the same pipeline as tests/run-reflection-processor.php: without
+            // deduplication this writes a cache containing duplicate entities over the
+            // committed path, and every validator then compares against corrupted data.
             $parsedReflectionDataStorageManager = new DefaultParsedDataStorageManager(
-                new JsonParsedDataStorage($cacheFilePath, $serializer, false)
+                new JsonParsedDataStorage($cacheFilePath, $serializer, false),
+                EntityProcessingPipelineFactory::forReflection()
             );
             $parser = new AllReflectionParser(
                 new CurrentRuntimeReflectionRawDataProvider(),
@@ -86,7 +94,7 @@ class Runner
         return $manager;
     }
 
-    public function getStubs(): ParsedDataStorageManager
+    public function getStubs(): StubDataQueryInterface
     {
         if ($this->stubsCache !== null) {
             return $this->stubsCache;
@@ -95,13 +103,7 @@ class Runner
         $cacheFilePath = $this->cacheDir . '/Stubs.json';
         $phpDocCacheFilePath = $this->cacheDir . '/StubsPhpDoc.json';
 
-        $cacheExists = file_exists($this->cacheDir . '/StubsClasses.json')
-            && file_exists($this->cacheDir . '/StubsFunctions.json')
-            && file_exists($this->cacheDir . '/StubsInterfaces.json')
-            && file_exists($this->cacheDir . '/StubsEnums.json')
-            && file_exists($this->cacheDir . '/StubsConstants.json');
-
-        if ($cacheExists) {
+        if ($this->isStubsCacheComplete()) {
             $phpDocStorage = new PhpDocStorage($phpDocCacheFilePath);
             $serializer = new StubsEntitySerializer($phpDocStorage);
             $storage = new MultiFileJsonStorage($cacheFilePath, $serializer, true, $phpDocStorage);
@@ -110,9 +112,10 @@ class Runner
             $phpDocStorage = new PhpDocStorage($phpDocCacheFilePath, false);
             $serializer = new StubsEntitySerializer($phpDocStorage);
             $storage = new MultiFileJsonStorage($cacheFilePath, $serializer, false, $phpDocStorage);
-            $pipeline = new EntityProcessingPipeline();
-            $pipeline->addProcessor(new StubsDeduplicationProcessor());
-            $parsedStubsDataStorageManager = new DefaultParsedDataStorageManager($storage, $pipeline);
+            $parsedStubsDataStorageManager = new DefaultParsedDataStorageManager(
+                $storage,
+                EntityProcessingPipelineFactory::forStubs()
+            );
             $parser = new AllStubsParser(
                 new AllStubsDataProvider(),
                 $parsedStubsDataStorageManager,
@@ -130,5 +133,35 @@ class Runner
         $this->stubsCache = $manager;
 
         return $manager;
+    }
+
+    /**
+     * Whether every stub cache artifact required by the read-from-cache path is present.
+     *
+     * MultiFileJsonStorage reads the five per-type files (StubsClasses/Functions/Interfaces/
+     * Enums/Constants.json) — the "Stubs.json" base path is only used to derive those names and
+     * is never read itself — and PhpDocStorage reads StubsPhpDoc.json. A partial cache (e.g. the
+     * per-type files present but StubsPhpDoc.json missing) must fall through to regeneration;
+     * otherwise the entities would load with all PhpDoc metadata (sinceVersion, removedVersion,
+     * typeFromPhpDoc, …) silently dropped, yielding wrong validation results.
+     */
+    public function isStubsCacheComplete(): bool
+    {
+        $requiredFiles = [
+            'StubsClasses.json',
+            'StubsFunctions.json',
+            'StubsInterfaces.json',
+            'StubsEnums.json',
+            'StubsConstants.json',
+            'StubsPhpDoc.json',
+        ];
+
+        foreach ($requiredFiles as $file) {
+            if (!file_exists($this->cacheDir . '/' . $file)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

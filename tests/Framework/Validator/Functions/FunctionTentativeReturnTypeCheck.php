@@ -2,9 +2,10 @@
 
 namespace StubTests\Framework\Validator\Functions;
 
-use StubTests\Framework\Parsers\StubDataQueryInterface;
+use StubTests\Framework\Storage\StubDataQueryInterface;
 use StubTests\Framework\Validator\AbstractCallableCheck;
 use StubTests\Framework\Validator\Contracts\CheckResultSet;
+use StubTests\Framework\Validator\KnownProblems\CheckType;
 use StubTests\Framework\Validator\KnownProblems\EntityType;
 
 /**
@@ -15,7 +16,7 @@ use StubTests\Framework\Validator\KnownProblems\EntityType;
  * - stub tentative, reflection not tentative → failure
  *
  * If the function is not found in stubs, validation is silently skipped
- * (FunctionExistsCheck handles existence).
+ * (EntityExistsCheck handles existence).
  *
  * Known problems are supported at function level:
  * - EntityType::FUNCTION + functionId + 'TentativeReturnTypeCheck'
@@ -33,7 +34,7 @@ class FunctionTentativeReturnTypeCheck extends AbstractCallableCheck
         $results = new CheckResultSet();
 
         $entityType = EntityType::fromEntityId($entityId)->value;
-        if ($this->skipWithKnownProblem($results, $entityType, $entityId, 'TentativeReturnTypeCheck', $phpVersion)) {
+        if ($this->skipWithKnownProblem($results, $entityType, $entityId, CheckType::TENTATIVE_RETURN_TYPE, $phpVersion)) {
             return $results;
         }
 
@@ -45,7 +46,7 @@ class FunctionTentativeReturnTypeCheck extends AbstractCallableCheck
             return $results;
         }
 
-        // Stub not found — FunctionExistsCheck's responsibility
+        // Stub not found — EntityExistsCheck's responsibility
         $stubCallable = $this->findCallable($stubs, $entityId, $phpVersion);
         if ($stubCallable === null) {
             $results->addSuccess($entityId);

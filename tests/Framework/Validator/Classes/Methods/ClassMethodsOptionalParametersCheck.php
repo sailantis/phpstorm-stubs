@@ -2,8 +2,11 @@
 
 namespace StubTests\Framework\Validator\Classes\Methods;
 
-use StubTests\Framework\Parsers\Model\PHPMethod;
-use StubTests\Framework\Validator\AbstractMethodFlagCheck;
+use StubTests\Framework\Validator\AbstractMemberFlagCheck;
+use StubTests\Framework\Validator\Contracts\DescribesMethodMismatch;
+use StubTests\Framework\Validator\Contracts\MemberKind;
+use StubTests\Framework\Model\PHPMethod;
+use StubTests\Framework\Validator\KnownProblems\CheckType;
 use StubTests\Framework\Validator\Services\OptionalParametersComparator;
 
 /**
@@ -28,16 +31,21 @@ use StubTests\Framework\Validator\Services\OptionalParametersComparator;
  * - method-level: EntityType::METHOD + '\ClassName::methodName' + 'OptionalParametersCheck'
  *   → skips only that specific method.
  */
-class ClassMethodsOptionalParametersCheck extends AbstractMethodFlagCheck
+class ClassMethodsOptionalParametersCheck extends AbstractMemberFlagCheck implements DescribesMethodMismatch
 {
-    protected function getCheckName(): string
+    protected function memberKind(): MemberKind
     {
-        return 'OptionalParametersCheck';
+        return MemberKind::METHOD;
     }
 
-    protected function describeMismatch(
+    protected function getCheckName(): CheckType
+    {
+        return CheckType::OPTIONAL_PARAMETERS;
+    }
+
+    public function describeMethodMismatch(
         string $methodEntityId,
-        mixed $reflMethod,
+        PHPMethod $reflMethod,
         PHPMethod $stubMethod,
         string $phpVersion
     ): ?string {

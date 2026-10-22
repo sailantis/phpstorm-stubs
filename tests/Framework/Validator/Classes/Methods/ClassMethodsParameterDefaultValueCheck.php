@@ -2,9 +2,12 @@
 
 namespace StubTests\Framework\Validator\Classes\Methods;
 
-use StubTests\Framework\Parsers\Model\PHPMethod;
+use StubTests\Framework\Validator\AbstractMemberFlagCheck;
+use StubTests\Framework\Validator\Contracts\DescribesMethodMismatch;
+use StubTests\Framework\Validator\Contracts\MemberKind;
+use StubTests\Framework\Model\PHPMethod;
 use StubTests\Framework\Runner\PhpVersions;
-use StubTests\Framework\Validator\AbstractMethodFlagCheck;
+use StubTests\Framework\Validator\KnownProblems\CheckType;
 use StubTests\Framework\Validator\Services\ParameterDefaultValueComparator;
 
 /**
@@ -28,21 +31,26 @@ use StubTests\Framework\Validator\Services\ParameterDefaultValueComparator;
  * - class-level:  EntityType::CLASS_TYPE + classId + 'ParameterDefaultValueCheck'
  * - method-level: EntityType::METHOD + '\ClassName::methodName' + 'ParameterDefaultValueCheck'
  */
-class ClassMethodsParameterDefaultValueCheck extends AbstractMethodFlagCheck
+class ClassMethodsParameterDefaultValueCheck extends AbstractMemberFlagCheck implements DescribesMethodMismatch
 {
+    protected function memberKind(): MemberKind
+    {
+        return MemberKind::METHOD;
+    }
+
     public function supports(string $phpVersion): bool
     {
         return $phpVersion === PhpVersions::LATEST->value;
     }
 
-    protected function getCheckName(): string
+    protected function getCheckName(): CheckType
     {
-        return 'ParameterDefaultValueCheck';
+        return CheckType::PARAMETER_DEFAULT_VALUE;
     }
 
-    protected function describeMismatch(
+    public function describeMethodMismatch(
         string $methodEntityId,
-        mixed $reflMethod,
+        PHPMethod $reflMethod,
         PHPMethod $stubMethod,
         string $phpVersion
     ): ?string {

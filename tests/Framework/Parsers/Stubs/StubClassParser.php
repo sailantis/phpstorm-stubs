@@ -4,15 +4,16 @@ namespace StubTests\Framework\Parsers\Stubs;
 
 use StubTests\Framework\Parsers\Stubs\PhpDoc\PhpDocParserInterface;
 use StubTests\Framework\Parsers\Stubs\PhpDoc\PhpDocumentorParser;
-use StubTests\Framework\Parsers\Stubs\PhpDoc\TemplateTypeNormalizer;
+use StubTests\Framework\PhpDoc\TemplateTypeNormalizer;
 use StubTests\Framework\Parsers\Stubs\Types\DefaultTypeParser;
 use StubTests\Framework\Parsers\Stubs\Types\TypeParserInterface;
 use StubTests\Framework\Parsers\Stubs\Versions\AvailableVersionParserInterface;
 use StubTests\Framework\Parsers\Stubs\Versions\DefaultAvailableVersionParser;
-use StubTests\Framework\Parsers\Model\PHPClass;
-use StubTests\Framework\Parsers\Model\PHPInterface;
+use StubTests\Framework\Model\PHPClass;
+use StubTests\Framework\Model\PHPInterface;
 use StubTests\Framework\Parsers\Stubs\Adapters\Nikic\NikicNodeExtractor;
 use StubTests\Framework\Parsers\Stubs\Nodes\ClassNode;
+use StubTests\Framework\Parsers\Types\TypeNameResolver;
 
 /**
  * Parses PHP class nodes from AST into PHPClass domain objects.
@@ -28,6 +29,7 @@ class StubClassParser implements MultiEntityStubParserInterface
     private StubMethodParser $methodParser;
     private StubPropertyParser $propertyParser;
     private StubClassConstantParser $constantParser;
+    private TypeNameResolver $nameResolver;
 
     public function __construct(
         ?ClassNodeExtractorInterface $nodeExtractor = null,
@@ -42,6 +44,7 @@ class StubClassParser implements MultiEntityStubParserInterface
         $this->methodParser = new StubMethodParser($phpDocParser, $typeParser, $versionParser);
         $this->propertyParser = new StubPropertyParser($phpDocParser, $typeParser, $versionParser);
         $this->constantParser = new StubClassConstantParser($phpDocParser, $versionParser);
+        $this->nameResolver = new TypeNameResolver();
     }
 
     /**
@@ -92,9 +95,21 @@ class StubClassParser implements MultiEntityStubParserInterface
         $classTemplateNames = TemplateTypeNormalizer::extractTemplateNames($parsedPhpDoc->rawPhpDoc);
 
         // Parse and apply available version (from PhpDoc + attributes)
-        $versions = $this->versionParser->parseAvailableVersion($parsedPhpDoc, $node->getAttributes(), $imports);
+        $attributeNodes = $node->getAttributes();
+        $versions = $this->versionParser->parseAvailableVersion($parsedPhpDoc, $attributeNodes, $imports);
         $phpClass->initStubsMetadata()->setSinceVersion($versions['sinceVersion']);
         $phpClass->initStubsMetadata()->setRemovedVersion($versions['removedVersion']);
+
+        // Retain the class-level attributes (name + evaluated arguments) so checks can
+        // compare them against reflection - e.g. the `#[Attribute(...)]` target flags.
+        $attributes = [];
+        foreach ($attributeNodes as $attributeNode) {
+            $attributes[] = [
+                'name' => $attributeNode->getName(),
+                'arguments' => $attributeNode->getArguments(),
+            ];
+        }
+        $phpClass->setAttributes($attributes);
 
         // Parent class. getName() keeps the short name as written in the source, while
         // getId() carries the fully qualified name resolved against the current namespace
@@ -151,9 +166,8 @@ class StubClassParser implements MultiEntityStubParserInterface
 
     /**
      * Resolve a class-like name (parent class or implemented interface) to a fully
-     * qualified name using PHP name-resolution rules, mirroring
-     * {@see TypeNodeConverter::resolveTypeName()} so class references and type hints
-     * resolve identically.
+     * qualified name, using the shared {@see TypeNameResolver} so class references and
+     * type hints resolve identically.
      *
      * @param string $name The name as written in the stub source
      * @param array $imports Map of import aliases to fully qualified names
@@ -162,24 +176,7 @@ class StubClassParser implements MultiEntityStubParserInterface
      */
     private function resolveClassName(string $name, array $imports, string $namespace): string
     {
-        // Already fully qualified.
-        if (str_starts_with($name, '\\')) {
-            return $name;
-        }
-
-        // Aliased/imported name (e.g. `use FFI\Exception;` then `extends Exception`).
-        if (isset($imports[$name])) {
-            $resolved = $imports[$name];
-            return str_starts_with($resolved, '\\') ? $resolved : '\\' . $resolved;
-        }
-
-        // Qualified but not imported (contains a separator) - treat as global-qualified.
-        if (str_contains($name, '\\')) {
-            return '\\' . $name;
-        }
-
-        // Unqualified name resolves relative to the current namespace.
-        return $namespace === '\\' ? '\\' . $name : $namespace . '\\' . $name;
+        return $this->nameResolver->resolve($name, $imports, $namespace);
     }
 
     /**

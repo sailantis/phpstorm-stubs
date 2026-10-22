@@ -3,9 +3,13 @@
 namespace StubTests\Framework\Parsers\Stubs;
 
 use StubTests\Framework\Parsers\Stubs\PhpDoc\PhpDocParserInterface;
+use StubTests\Framework\Parsers\Stubs\PhpDoc\PhpDocumentorParser;
+use StubTests\Framework\PhpDoc\TemplateTypeNormalizer;
 use StubTests\Framework\Parsers\Stubs\Versions\AvailableVersionParserInterface;
-use StubTests\Framework\Parsers\Model\PHPEnum;
-use StubTests\Framework\Parsers\Model\PHPInterface;
+use StubTests\Framework\Parsers\Stubs\Versions\DefaultAvailableVersionParser;
+use StubTests\Framework\Parsers\Types\TypeNameResolver;
+use StubTests\Framework\Model\PHPEnum;
+use StubTests\Framework\Model\PHPInterface;
 use StubTests\Framework\Parsers\Stubs\Adapters\Nikic\NikicNodeExtractor;
 use StubTests\Framework\Parsers\Stubs\Nodes\EnumNode;
 
@@ -17,8 +21,11 @@ use StubTests\Framework\Parsers\Stubs\Nodes\EnumNode;
 class StubEnumParser implements MultiEntityStubParserInterface
 {
     private EnumNodeExtractorInterface $nodeExtractor;
+    private PhpDocParserInterface $phpDocParser;
+    private AvailableVersionParserInterface $versionParser;
     private StubMethodParser $methodParser;
     private StubClassConstantParser $constantParser;
+    private TypeNameResolver $nameResolver;
 
     public function __construct(
         ?EnumNodeExtractorInterface $nodeExtractor = null,
@@ -26,8 +33,13 @@ class StubEnumParser implements MultiEntityStubParserInterface
         ?AvailableVersionParserInterface $versionParser = null
     ) {
         $this->nodeExtractor = $nodeExtractor ?? new NikicNodeExtractor();
-        $this->methodParser = new StubMethodParser($phpDocParser, null, $versionParser);
-        $this->constantParser = new StubClassConstantParser($phpDocParser, $versionParser);
+        $this->phpDocParser = $phpDocParser ?? new PhpDocumentorParser();
+        $this->versionParser = $versionParser ?? new DefaultAvailableVersionParser();
+        // Pass the resolved instances so every nesting level shares one parser rather
+        // than allocating its own DocBlockFactory chain.
+        $this->methodParser = new StubMethodParser($this->phpDocParser, null, $this->versionParser);
+        $this->constantParser = new StubClassConstantParser($this->phpDocParser, $this->versionParser);
+        $this->nameResolver = new TypeNameResolver();
     }
 
     /**
@@ -65,14 +77,30 @@ class StubEnumParser implements MultiEntityStubParserInterface
             $phpEnum->setId($phpEnum->getNamespace() . '\\' . $phpEnum->getName());
         }
 
+        // Parse PhpDoc using injected parser. Without this the enum's @since/@removed and
+        // raw PhpDoc were dropped, so every stub enum looked available in all PHP versions.
+        $parsedPhpDoc = $this->phpDocParser->parseElementPhpDoc($node->getDocComment());
+        $phpEnum->initStubsMetadata()->setPhpDoc($parsedPhpDoc->rawPhpDoc);
+
+        // Parse and apply available version (from PhpDoc + attributes)
+        $versions = $this->versionParser->parseAvailableVersion($parsedPhpDoc, $node->getAttributes(), $imports);
+        $phpEnum->initStubsMetadata()->setSinceVersion($versions['sinceVersion']);
+        $phpEnum->initStubsMetadata()->setRemovedVersion($versions['removedVersion']);
+
+        // Enum-level @template names propagate to methods that reference them
+        $classTemplateNames = TemplateTypeNormalizer::extractTemplateNames($parsedPhpDoc->rawPhpDoc);
+
         // Enum-specific properties
         $phpEnum->setIsFinal($node->isFinal()); // Always true for enums
         $phpEnum->setIsReadonly(false); // Enums are not readonly
 
-        // Implemented interfaces
+        // Implemented interfaces - name/id resolved exactly as StubClassParser does, so an
+        // enum implementing a namespaced interface is not left to the resolver's short-name
+        // fallback (which prefers a same-named global interface).
         foreach ($node->getImplementedInterfaceNames() as $interfaceName) {
             $phpInterface = new PHPInterface();
-            $phpInterface->setName($interfaceName);
+            $phpInterface->setName($this->shortName($interfaceName));
+            $phpInterface->setId($this->nameResolver->resolve($interfaceName, $imports, $phpEnum->getNamespace()));
             $phpEnum->addImplementedInterface($phpInterface);
         }
 
@@ -85,7 +113,9 @@ class StubEnumParser implements MultiEntityStubParserInterface
 
         // Methods - pass namespace context for type resolution
         foreach ($node->getMethods() as $methodNode) {
-            $phpEnum->addMethod($this->methodParser->parseNode($methodNode, $imports, $phpEnum->getNamespace()));
+            $phpEnum->addMethod(
+                $this->methodParser->parseNode($methodNode, $imports, $phpEnum->getNamespace(), $classTemplateNames)
+            );
         }
 
         // Cases
@@ -106,6 +136,15 @@ class StubEnumParser implements MultiEntityStubParserInterface
         }
 
         return $phpEnum;
+    }
+
+    /**
+     * Short name of a possibly qualified name (`\Foo\Bar` => `Bar`).
+     */
+    private function shortName(string $name): string
+    {
+        $pos = strrpos($name, '\\');
+        return $pos === false ? $name : substr($name, $pos + 1);
     }
 
     /**

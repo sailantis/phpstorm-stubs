@@ -2,9 +2,9 @@
 
 namespace StubTests\Framework\Validator;
 
-use StubTests\Framework\Parsers\StubDataQueryInterface;
+use StubTests\Framework\Storage\StubDataQueryInterface;
 use StubTests\Framework\Validator\Contracts\CheckResultSet;
-use StubTests\Framework\Validator\Contracts\EntityTypeConfig;
+use StubTests\Framework\Validator\KnownProblems\CheckType;
 
 /**
  * Base for entity-level final-flag checks.
@@ -25,9 +25,9 @@ abstract class AbstractFinalCheck extends AbstractClassCheck
     /**
      * Template method: check name for known-problem lookups.
      */
-    protected function getCheckName(): string
+    protected function getCheckName(): CheckType
     {
-        return 'ClassFinalCheck';
+        return CheckType::CLASS_FINAL;
     }
 
     public function run(StubDataQueryInterface $stubs, string $entityId, string $phpVersion): CheckResultSet

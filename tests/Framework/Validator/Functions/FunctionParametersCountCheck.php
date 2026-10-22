@@ -2,9 +2,10 @@
 
 namespace StubTests\Framework\Validator\Functions;
 
-use StubTests\Framework\Parsers\StubDataQueryInterface;
+use StubTests\Framework\Storage\StubDataQueryInterface;
 use StubTests\Framework\Validator\AbstractCallableCheck;
 use StubTests\Framework\Validator\Contracts\CheckResultSet;
+use StubTests\Framework\Validator\KnownProblems\CheckType;
 use StubTests\Framework\Validator\KnownProblems\EntityType;
 use StubTests\Framework\Validator\Services\ParameterCountComparator;
 
@@ -16,15 +17,17 @@ use StubTests\Framework\Validator\Services\ParameterCountComparator;
  * 2. Looks up the function in stubs using version-aware selection
  *    (PhpStormStubsElementAvailable `from`/`to` on the function itself).
  * 3. If the stub function is not found it is silently skipped — existence is
- *    FunctionExistsCheck's responsibility.
+ *    EntityExistsCheck's responsibility.
  * 4. When both sides are found, the stub parameter list is filtered by version
  *    (PhpStormStubsElementAvailable `from`/`to` on parameters →
  *    sinceVersion/removedVersion) and the resulting count is compared with
  *    the reflection count.
  *
- * Parameter version filtering uses inclusive boundaries for removedVersion (`<=`),
- * consistent with how PhpStormStubsElementAvailable `to` is interpreted elsewhere
- * (e.g. `to: '7.0'` means the parameter is still available in PHP 7.0).
+ * Parameter version filtering compares removedVersion **exclusively** (`phpVersion <
+ * removedVersion`), per StubsMetadata::isAvailableIn(). The inclusive reading belongs to
+ * the attribute, not to removedVersion: DefaultAvailableVersionParser converts
+ * `to: '7.0'` into `removedVersion = '7.1'`, so the parameter is still available in
+ * PHP 7.0 even though the comparison itself is exclusive.
  *
  * Known problems are supported:
  * - EntityType::FUNCTION + functionId + 'ParametersCountCheck'
@@ -41,7 +44,7 @@ class FunctionParametersCountCheck extends AbstractCallableCheck
     {
         $results = new CheckResultSet();
 
-        if ($this->skipWithKnownProblem($results, EntityType::FUNCTION->value, $entityId, 'ParametersCountCheck', $phpVersion)) {
+        if ($this->skipWithKnownProblem($results, EntityType::FUNCTION->value, $entityId, CheckType::PARAMETERS_COUNT, $phpVersion)) {
             return $results;
         }
 
@@ -56,7 +59,7 @@ class FunctionParametersCountCheck extends AbstractCallableCheck
         $stubFunction = $this->findCallable($stubs, $entityId, $phpVersion);
 
         if ($stubFunction === null) {
-            // Function absent from stubs — FunctionExistsCheck's responsibility
+            // Function absent from stubs — EntityExistsCheck's responsibility
             $results->addSuccess($entityId);
             return $results;
         }

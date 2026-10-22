@@ -2,8 +2,7 @@
 
 namespace StubTests\Unit\Validator\Meta;
 
-use StubTests\Framework\Parsers\Model\PHPFunction;
-use StubTests\Framework\Parsers\Model\PHPMethod;
+use StubTests\Framework\Model\PHPMethod;
 use StubTests\Framework\Validator\Meta\FunctionReferencesExistsCheck;
 use StubTests\Framework\Validator\Services\EntityLookupService;
 use StubTests\Unit\Validator\CheckTestCase;
@@ -77,16 +76,5 @@ class FunctionReferencesExistsCheckTest extends CheckTestCase
         $check = new FunctionReferencesExistsCheck();
         $this->assertTrue($check->supports('5.6'));
         $this->assertTrue($check->supports('8.4'));
-    }
-
-    private function makeFunction(string $id): PHPFunction
-    {
-        $func = $this->getMockBuilder(PHPFunction::class)
-            ->disableOriginalConstructor()
-            ->onlyMethods(['getId', 'getName'])
-            ->getMock();
-        $func->method('getId')->willReturn($id);
-        $func->method('getName')->willReturn(ltrim($id, '\\'));
-        return $func;
     }
 }

@@ -4,7 +4,7 @@ namespace StubTests\Unit\Parsers\Reflection;
 
 use PHPUnit\Framework\TestCase;
 use ReflectionConstant;
-use StubTests\Framework\Parsers\Model\PHPConstant;
+use StubTests\Framework\Model\PHPConstant;
 use StubTests\Framework\Parsers\Reflection\ReflectionModernConstantParser;
 
 class ReflectionModernConstantParserTest extends TestCase
@@ -16,15 +16,26 @@ class ReflectionModernConstantParserTest extends TestCase
         eval('namespace TestNamespace; const DUMMY_CONSTANT = "TestValue";');
     }
 
-    public function testItCanParseConstants()
-    {
-        self::assertNotNull(new ReflectionModernConstantParser()->parse(new ReflectionConstant('DUMMY_CONSTANT')));
-    }
-
-    public function testItReturnsCorrectInstanceOfConstants()
+    /**
+     * Replaces an `assertNotNull` guaranteed by the non-nullable PHPConstant return type.
+     * The eval'd constant's name and value are what the parser must actually read.
+     */
+    public function testItParsesNameAndValueFromTheReflectionConstant()
     {
         $parsedObject = new ReflectionModernConstantParser()->parse(new ReflectionConstant('DUMMY_CONSTANT'));
-        self::assertTrue($parsedObject instanceof PHPConstant);
+
+        self::assertSame('DUMMY_CONSTANT', $parsedObject->getName());
+        self::assertSame('TestValue', $parsedObject->getValue());
+    }
+
+    /**
+     * Replaces an `instanceof` assertion the return type already guaranteed.
+     */
+    public function testItDerivesTheIdFromTheConstantName()
+    {
+        $parsedObject = new ReflectionModernConstantParser()->parse(new ReflectionConstant('DUMMY_CONSTANT'));
+
+        self::assertSame('\\DUMMY_CONSTANT', $parsedObject->getId());
     }
 
     public function testItCanParseConstantNameForModernConstant()

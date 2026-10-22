@@ -2,7 +2,6 @@
 
 namespace StubTests\Unit\Validator\Functions;
 
-use StubTests\Framework\Parsers\Model\PHPFunction;
 use StubTests\Framework\Runner\PhpVersionRange;
 use StubTests\Framework\Runner\PhpVersions;
 use StubTests\Framework\Validator\Functions\FunctionOptionalParametersCheck;
@@ -28,15 +27,6 @@ class FunctionOptionalParametersCheckTest extends CheckTestCase
     {
         KnownProblemsRegistry::reset();
         parent::tearDown();
-    }
-
-    private function makeFunction(string $id, array $params = []): PHPFunction
-    {
-        $fn = new PHPFunction();
-        $fn->setId($id);
-        $fn->setName(ltrim($id, '\\'));
-        $fn->setParameters($params);
-        return $fn;
     }
 
     // ── supports() ────────────────────────────────────────────────────────────
@@ -66,7 +56,7 @@ class FunctionOptionalParametersCheckTest extends CheckTestCase
 
     public function testFunctionNotFoundInStubsIsSuccess(): void
     {
-        // Absence from stubs is FunctionExistsCheck's responsibility — silently skip
+        // Absence from stubs is EntityExistsCheck's responsibility — silently skip
         $id = '\\missing_func';
         $provider = $this->createMockReflectionProvider([$this->makeFunction($id)]);
         $stubs = $this->createMockStorageManager();
@@ -252,7 +242,7 @@ class FunctionOptionalParametersCheckTest extends CheckTestCase
     {
         $id = '\\special_func';
 
-        $knownProblemsProvider = $this->createMock(\StubTests\Framework\Validator\KnownProblems\KnownProblemsProvider::class);
+        $knownProblemsProvider = $this->createStub(\StubTests\Framework\Validator\KnownProblems\KnownProblemsProvider::class);
         $knownProblemsProvider->method('getProblems')->willReturn([
             new ProblemDefinition(
                 entityType: EntityType::FUNCTION,

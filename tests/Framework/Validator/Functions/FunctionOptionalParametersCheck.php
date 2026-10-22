@@ -2,9 +2,10 @@
 
 namespace StubTests\Framework\Validator\Functions;
 
-use StubTests\Framework\Parsers\StubDataQueryInterface;
+use StubTests\Framework\Storage\StubDataQueryInterface;
 use StubTests\Framework\Validator\AbstractCallableCheck;
 use StubTests\Framework\Validator\Contracts\CheckResultSet;
+use StubTests\Framework\Validator\KnownProblems\CheckType;
 use StubTests\Framework\Validator\KnownProblems\EntityType;
 use StubTests\Framework\Validator\Services\OptionalParametersComparator;
 
@@ -18,10 +19,10 @@ use StubTests\Framework\Validator\Services\OptionalParametersComparator;
  * A stub parameter is considered optional when:
  * - It has a default value in the signature (e.g. `$mode = SORT_REGULAR`), or
  * - It is variadic (e.g. `...$args`), or
- * - Its @param description contains [optional].
+ * - Its `@param` description contains [optional].
  *
  * If the stub function is not found it is silently skipped — existence is
- * FunctionExistsCheck's responsibility.
+ * EntityExistsCheck's responsibility.
  *
  * Known problems are supported at function level:
  * - EntityType::FUNCTION + functionId + 'OptionalParametersCheck'
@@ -38,7 +39,7 @@ class FunctionOptionalParametersCheck extends AbstractCallableCheck
     {
         $results = new CheckResultSet();
 
-        if ($this->skipWithKnownProblem($results, EntityType::FUNCTION->value, $entityId, 'OptionalParametersCheck', $phpVersion)) {
+        if ($this->skipWithKnownProblem($results, EntityType::FUNCTION->value, $entityId, CheckType::OPTIONAL_PARAMETERS, $phpVersion)) {
             return $results;
         }
 
@@ -53,7 +54,7 @@ class FunctionOptionalParametersCheck extends AbstractCallableCheck
         $stubFunction = $this->findCallable($stubs, $entityId, $phpVersion);
 
         if ($stubFunction === null) {
-            // Function absent from stubs — FunctionExistsCheck's responsibility
+            // Function absent from stubs — EntityExistsCheck's responsibility
             $results->addSuccess($entityId);
             return $results;
         }

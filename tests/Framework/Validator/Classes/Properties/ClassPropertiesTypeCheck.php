@@ -2,13 +2,16 @@
 
 namespace StubTests\Framework\Validator\Classes\Properties;
 
-use StubTests\Framework\Parsers\Model\PHPProperty;
-use StubTests\Framework\Parsers\Model\Types\IntersectionType;
-use StubTests\Framework\Parsers\Model\Types\NoType;
-use StubTests\Framework\Parsers\Model\Types\NullableType;
-use StubTests\Framework\Parsers\Model\Types\StandaloneType;
-use StubTests\Framework\Parsers\Model\Types\UnionType;
-use StubTests\Framework\Validator\AbstractPropertyFlagCheck;
+use StubTests\Framework\Validator\AbstractMemberFlagCheck;
+use StubTests\Framework\Validator\Contracts\DescribesPropertyMismatch;
+use StubTests\Framework\Validator\Contracts\MemberKind;
+use StubTests\Framework\Model\PHPProperty;
+use StubTests\Framework\Model\Types\IntersectionType;
+use StubTests\Framework\Model\Types\NoType;
+use StubTests\Framework\Model\Types\NullableType;
+use StubTests\Framework\Model\Types\StandaloneType;
+use StubTests\Framework\Model\Types\UnionType;
+use StubTests\Framework\Validator\KnownProblems\CheckType;
 use StubTests\Framework\Validator\Services\TypeResolver;
 
 /**
@@ -39,20 +42,25 @@ use StubTests\Framework\Validator\Services\TypeResolver;
  * - property-level: EntityType::PROPERTY + '\ClassName::$propertyName' + 'ClassPropertiesTypeCheck'
  *   → skips only that specific mismatch.
  */
-class ClassPropertiesTypeCheck extends AbstractPropertyFlagCheck
+class ClassPropertiesTypeCheck extends AbstractMemberFlagCheck implements DescribesPropertyMismatch
 {
+    protected function memberKind(): MemberKind
+    {
+        return MemberKind::PROPERTY;
+    }
+
     public function supports(string $phpVersion): bool
     {
         // Typed properties were introduced in PHP 7.4
         return version_compare($phpVersion, '7.4', '>=');
     }
 
-    protected function getCheckName(): string
+    protected function getCheckName(): CheckType
     {
-        return 'ClassPropertiesTypeCheck';
+        return CheckType::CLASS_PROPERTIES_TYPE;
     }
 
-    protected function describeMismatch(
+    public function describePropertyMismatch(
         string $propertyEntityId,
         PHPProperty $reflProperty,
         PHPProperty $stubProperty,

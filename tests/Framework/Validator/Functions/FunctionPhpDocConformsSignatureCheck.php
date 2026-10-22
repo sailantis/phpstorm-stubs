@@ -2,11 +2,13 @@
 
 namespace StubTests\Framework\Validator\Functions;
 
-use StubTests\Framework\Parsers\StubDataQueryInterface;
+use StubTests\Framework\Storage\StubDataQueryInterface;
 use StubTests\Framework\Validator\AbstractCallableCheck;
 use StubTests\Framework\Validator\Contracts\CheckResultSet;
+use StubTests\Framework\Validator\KnownProblems\CheckType;
 use StubTests\Framework\Validator\KnownProblems\EntityType;
 use StubTests\Framework\Validator\KnownProblemsRegistry;
+use StubTests\Framework\Validator\Services\ParameterFilterHelper;
 use StubTests\Framework\Validator\Services\PhpDocConformanceService;
 use StubTests\Framework\Validator\Contracts\ReflectionProviderInterface;
 use StubTests\Framework\Validator\Services\ReturnTypeResolver;
@@ -18,7 +20,7 @@ use StubTests\Framework\Validator\Services\ReturnTypeResolver;
  * This is a stubs-only check (reflection data is never used). For each function
  * identified by $entityId the validator:
  * 1. Looks up the function in stubs using version-aware selection.
- * 2. If not found, silently succeeds — FunctionExistsCheck handles absence.
+ * 2. If not found, silently succeeds — EntityExistsCheck handles absence.
  * 3. For both return type and each parameter, compares the signature type with the
  *    PhpDoc type using the permissive compatibility algorithm in PhpDocConformanceTrait.
  * 4. Reports mismatches where sig and PhpDoc types share no common component.
@@ -52,14 +54,14 @@ class FunctionPhpDocConformsSignatureCheck extends AbstractCallableCheck
     {
         $results = new CheckResultSet();
 
-        if ($this->skipWithKnownProblem($results, EntityType::FUNCTION->value, $entityId, 'PhpDocConformsSignatureCheck', $phpVersion)) {
+        if ($this->skipWithKnownProblem($results, EntityType::FUNCTION->value, $entityId, CheckType::PHPDOC_CONFORMS_SIGNATURE, $phpVersion)) {
             return $results;
         }
 
         $stubFunction = $this->findCallable($stubs, $entityId, $phpVersion);
 
         if ($stubFunction === null) {
-            // Function absent from stubs — FunctionExistsCheck's responsibility
+            // Function absent from stubs — EntityExistsCheck's responsibility
             $results->addSuccess($entityId);
             return $results;
         }
@@ -85,7 +87,7 @@ class FunctionPhpDocConformsSignatureCheck extends AbstractCallableCheck
 
         // Check each parameter
         $params = $stubFunction->getParameters();
-        foreach ($this->conformanceService->filterAndDeduplicateParamsPhpDoc($params, $phpVersion) as $param) {
+        foreach (ParameterFilterHelper::filterAndDeduplicate($params, $phpVersion) as $param) {
             $sigType = $this->conformanceService->getParamSigTypeForPhpDoc($param, $phpVersion);
             $docType = $param->getStubsMetadata()?->getTypeFromPhpDoc();
 

@@ -2,12 +2,11 @@
 
 namespace StubTests\Framework\Validator\PhpDoc;
 
-use StubTests\Framework\Parsers\Model\PHPClassLikeObject;
-use StubTests\Framework\Parsers\StubDataQueryInterface;
+use StubTests\Framework\Storage\StubDataQueryInterface;
 use StubTests\Framework\Validator\AbstractReflectionCheck;
 use StubTests\Framework\Validator\Contracts\CheckResultSet;
+use StubTests\Framework\Validator\KnownProblems\CheckType;
 use StubTests\Framework\Validator\Services\EntityLookupService;
-use StubTests\Framework\Validator\KnownProblems\EntityType;
 use StubTests\Framework\Validator\KnownProblemsRegistry;
 use StubTests\Framework\Validator\Contracts\ReflectionProviderInterface;
 
@@ -31,6 +30,7 @@ use StubTests\Framework\Validator\Contracts\ReflectionProviderInterface;
  */
 class PhpDocTagsCheck extends AbstractReflectionCheck
 {
+    use PhpDocLocationWalkerTrait;
     private EntityLookupService $entityLookup;
 
     public function __construct(
@@ -81,7 +81,7 @@ class PhpDocTagsCheck extends AbstractReflectionCheck
 
         [$entity, $entityType] = $found;
 
-        if ($this->skipWithKnownProblem($results, $entityType->value, $entityId, 'PhpDocTagsCheck', $phpVersion)) {
+        if ($this->skipWithKnownProblem($results, $entityType->value, $entityId, CheckType::PHPDOC_TAGS, $phpVersion)) {
             return $results;
         }
 
@@ -109,33 +109,11 @@ class PhpDocTagsCheck extends AbstractReflectionCheck
      */
     private function collectInvalidTagsByLocation(object $entity, string $entityId): array
     {
-        $result = [];
-
-        // Entity-level phpDoc
-        $phpDoc = $entity->getStubsMetadata()?->getPhpDoc();
-        if ($phpDoc !== null && $phpDoc !== '') {
-            $invalid = $this->findInvalidTagNames($phpDoc);
-            if (!empty($invalid)) {
-                $result[$entityId] = $invalid;
-            }
-        }
-
-        // Method-level phpDocs for class-like entities
-        if ($entity instanceof PHPClassLikeObject) {
-            foreach ($entity->getMethods() as $method) {
-                $phpDoc = $method->getStubsMetadata()?->getPhpDoc();
-                if ($phpDoc === null || $phpDoc === '') {
-                    continue;
-                }
-                $invalid = $this->findInvalidTagNames($phpDoc);
-                if (!empty($invalid)) {
-                    $methodId = $entityId . '::' . $method->getName();
-                    $result[$methodId] = $invalid;
-                }
-            }
-        }
-
-        return $result;
+        return $this->collectByPhpDocLocation(
+            $entity,
+            $entityId,
+            fn (string $phpDoc): array => $this->findInvalidTagNames($phpDoc)
+        );
     }
 
     /**
@@ -179,7 +157,7 @@ class PhpDocTagsCheck extends AbstractReflectionCheck
         }
 
         // Inline tags: {@tagname}
-        preg_match_all('/\{@([a-zA-Z][a-zA-Z0-9_-]*)\}/', $phpDoc, $inlineMatches);
+        preg_match_all('/\{@([a-zA-Z][a-zA-Z0-9_-]*)}/', $phpDoc, $inlineMatches);
         foreach ($inlineMatches[1] as $tag) {
             $tags[] = strtolower($tag);
         }

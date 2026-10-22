@@ -2,10 +2,11 @@
 
 namespace StubTests\Framework\Validator\Functions;
 
-use StubTests\Framework\Parsers\StubDataQueryInterface;
+use StubTests\Framework\Storage\StubDataQueryInterface;
 use StubTests\Framework\Runner\PhpVersions;
 use StubTests\Framework\Validator\AbstractCallableCheck;
 use StubTests\Framework\Validator\Contracts\CheckResultSet;
+use StubTests\Framework\Validator\KnownProblems\CheckType;
 use StubTests\Framework\Validator\KnownProblems\EntityType;
 use StubTests\Framework\Validator\Services\ParameterDefaultValueComparator;
 use StubTests\Framework\Validator\Services\ParameterFilterHelper;
@@ -19,7 +20,7 @@ use StubTests\Framework\Validator\Services\ParameterFilterHelper;
  * For each function identified by $entityId the validator:
  * 1. Looks up the function in reflection and stubs.
  * 2. If the stub function is not found it is silently skipped — existence is
- *    FunctionExistsCheck's responsibility.
+ *    EntityExistsCheck's responsibility.
  * 3. For each reflection parameter with an accessible default, checks whether
  *    the matching stub parameter (by name) declares the same evaluated default.
  * 4. Comparison is skipped when either side's value is null (see class-level check
@@ -39,7 +40,7 @@ class FunctionParameterDefaultValueCheck extends AbstractCallableCheck
     {
         $results = new CheckResultSet();
 
-        if ($this->skipWithKnownProblem($results, EntityType::FUNCTION->value, $entityId, 'ParameterDefaultValueCheck', $phpVersion)) {
+        if ($this->skipWithKnownProblem($results, EntityType::FUNCTION->value, $entityId, CheckType::PARAMETER_DEFAULT_VALUE, $phpVersion)) {
             return $results;
         }
 
@@ -54,7 +55,7 @@ class FunctionParameterDefaultValueCheck extends AbstractCallableCheck
         $stubFunction = $this->findCallable($stubs, $entityId, $phpVersion);
 
         if ($stubFunction === null) {
-            // Function absent from stubs — FunctionExistsCheck's responsibility
+            // Function absent from stubs — EntityExistsCheck's responsibility
             $results->addSuccess($entityId);
             return $results;
         }

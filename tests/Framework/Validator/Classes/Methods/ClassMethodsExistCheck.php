@@ -2,9 +2,10 @@
 
 namespace StubTests\Framework\Validator\Classes\Methods;
 
-use StubTests\Framework\Parsers\StubDataQueryInterface;
+use StubTests\Framework\Storage\StubDataQueryInterface;
 use StubTests\Framework\Validator\AbstractClassCheck;
 use StubTests\Framework\Validator\Contracts\CheckResultSet;
+use StubTests\Framework\Validator\KnownProblems\CheckType;
 use StubTests\Framework\Validator\KnownProblems\EntityType;
 
 /**
@@ -21,7 +22,10 @@ use StubTests\Framework\Validator\KnownProblems\EntityType;
  * attributes during stub parsing). A stub method is considered available for a given
  * PHP version if:
  *   - sinceVersion is null OR phpVersion >= sinceVersion
- *   - AND removedVersion is null OR phpVersion <= removedVersion
+ *   - AND removedVersion is null OR phpVersion < removedVersion
+ *
+ * removedVersion is exclusive: a method with @removed 8.0 is absent from 8.0 itself.
+ * See StubsMetadata::isAvailableIn(), which is the single implementation of this rule.
  *
  * Known problems are supported at two granularities:
  * - class-level: EntityType::CLASS_TYPE + classId + 'ClassMethodsExistCheck'
@@ -31,9 +35,9 @@ use StubTests\Framework\Validator\KnownProblems\EntityType;
  */
 class ClassMethodsExistCheck extends AbstractClassCheck
 {
-    protected function getCheckName(): string
+    protected function getCheckName(): CheckType
     {
-        return 'ClassMethodsExistCheck';
+        return CheckType::CLASS_METHODS_EXIST;
     }
 
     public function supports(string $phpVersion): bool

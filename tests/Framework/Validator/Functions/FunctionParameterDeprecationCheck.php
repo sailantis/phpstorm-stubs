@@ -2,10 +2,12 @@
 
 namespace StubTests\Framework\Validator\Functions;
 
-use StubTests\Framework\Parsers\StubDataQueryInterface;
+use StubTests\Framework\Storage\StubDataQueryInterface;
 use StubTests\Framework\Validator\AbstractCallableCheck;
 use StubTests\Framework\Validator\Contracts\CheckResultSet;
+use StubTests\Framework\Validator\KnownProblems\CheckType;
 use StubTests\Framework\Validator\KnownProblems\EntityType;
+use StubTests\Framework\Validator\Services\DeprecationComparator;
 use StubTests\Framework\Validator\Services\ParameterFilterHelper;
 
 /**
@@ -30,7 +32,7 @@ class FunctionParameterDeprecationCheck extends AbstractCallableCheck
         $results = new CheckResultSet();
 
         $entityType = EntityType::fromEntityId($entityId)->value;
-        if ($this->skipWithKnownProblem($results, $entityType, $entityId, 'ParameterDeprecationCheck', $phpVersion)) {
+        if ($this->skipWithKnownProblem($results, $entityType, $entityId, CheckType::PARAMETER_DEPRECATION, $phpVersion)) {
             return $results;
         }
 
@@ -42,7 +44,7 @@ class FunctionParameterDeprecationCheck extends AbstractCallableCheck
             return $results;
         }
 
-        // Stub not found — FunctionExistsCheck's responsibility
+        // Stub not found — EntityExistsCheck's responsibility
         $stubCallable = $this->findCallable($stubs, $entityId, $phpVersion);
         if ($stubCallable === null) {
             $results->addSuccess($entityId);
@@ -64,8 +66,7 @@ class FunctionParameterDeprecationCheck extends AbstractCallableCheck
         foreach ($reflParams as $reflParam) {
             $reflName = $reflParam->getName();
 
-            $reflDeprecated = $reflParam->isDeprecated();
-            if (!$reflDeprecated) {
+            if (!DeprecationComparator::isDeprecatedIn($reflParam, $phpVersion)) {
                 continue;
             }
 
@@ -73,9 +74,7 @@ class FunctionParameterDeprecationCheck extends AbstractCallableCheck
                 continue;
             }
 
-            $stubDeprecated = $stubParamsByName[$reflName]->isDeprecated();
-
-            if (!$stubDeprecated) {
+            if (!DeprecationComparator::isDeprecatedIn($stubParamsByName[$reflName], $phpVersion)) {
                 $mismatches[] = "\${$reflName}";
             }
         }

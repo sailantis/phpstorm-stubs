@@ -12,14 +12,14 @@ class Relay
      *
      * @var string
      */
-    public const VERSION = "0.30.0";
+    public const VERSION = "0.50.0";
 
     /**
      * Relay's version.
      *
      * @var string
      */
-    public const Version = "0.30.0";
+    public const Version = "0.50.0";
 
     /**
      * Integer representing no compression algorithm.
@@ -1754,7 +1754,7 @@ class Relay
      * @param  int  $maxBurst
      * @param  int  $requestsPerPeriod
      * @param  int  $period
-     * @param  int  $tokens = 0
+     * @param  int  $tokens
      * @return Relay|array|false
      */
     #[Attributes\RedisCommand]
@@ -2269,6 +2269,46 @@ class Relay
     public function lmove(mixed $srckey, mixed $dstkey, string $srcpos, string $dstpos): mixed {}
 
     /**
+     * Move's one or more elements from the src to dst list with options
+     *
+     * @param  mixed  $srckey
+     * @param  mixed  $dstkey
+     * @param  string  $srcpos
+     * @param  string  $dstpos
+     * @param  array|null  $options
+     * @return Relay|array|null|false
+     */
+    #[Attributes\RedisCommand]
+    public function lmovem(
+        mixed $srckey,
+        mixed $dstkey,
+        string $srcpos,
+        string $dstpos,
+        ?array $options = null
+    ): Relay|array|null|false {}
+
+    /**
+     * Blocking more of one or more elements from the src to dst list with options
+     *
+     * @param  mixed  $srckey
+     * @param  mixed  $dstkey
+     * @param  string  $srcpos
+     * @param  string  $dstpos
+     * @param  float  $timeout
+     * @param  array|null  $options
+     * @return Relay|array|null|false
+     */
+    #[Attributes\RedisCommand]
+    public function blmovem(
+        mixed $srckey,
+        mixed $dstkey,
+        string $srcpos,
+        string $dstpos,
+        float $timeout,
+        ?array $options = null
+    ): Relay|array|null|false {}
+
+    /**
      * BLMOVE is the blocking variant of LMOVE. When source contains elements,
      * this command behaves exactly like LMOVE. When used inside a
      * MULTI/EXEC block, this command behaves exactly like LMOVE.
@@ -2575,11 +2615,27 @@ class Relay
     public function hget(mixed $hash, mixed $member): mixed {}
 
     /**
+     * Manages session-local HIMPORT fieldsets and imports hash values.
+     *
+     * @param  string  $op
+     * @param  string|null  $hash
+     * @param  string|null  $fieldset
+     * @param  array  $fields
+     * @return Relay|bool|int
+     */
+    public function himport(
+        string $op,
+        ?string $hash = null,
+        ?string $fieldset = null,
+        array $fields = []
+    ): Relay|bool|int {}
+
+    /**
      * Returns one or more fields while also setting an expiration on them.
      *
      * @param  mixed  $hash
      * @param  array  $fields
-     * @param  mixed  $expiry = null
+     * @param  mixed  $expiry
      * @return Relay|array|false
      */
     public function hgetex(mixed $hash, array $fields, mixed $expiry = null): Relay|array|false {}
@@ -2807,7 +2863,7 @@ class Relay
      *
      * @param  mixed  $key
      * @param  array  $fields
-     * @param  null|int|float|array  $expiry = null
+     * @param  null|int|float|array  $expiry
      * @return Relay|int|false
      */
     #[Attributes\RedisCommand]
@@ -3176,6 +3232,17 @@ class Relay
     public function sdiff(mixed $key, mixed ...$other_keys): Relay|array|false {}
 
     /**
+     * Returns the number of members of the difference between the first set
+     * and all successive sets.
+     *
+     * @param  array  $keys
+     * @param  array|null  $options
+     * @return Relay|int|false
+     */
+    #[Attributes\RedisCommand, Attributes\Cached]
+    public function sdiffcard(array $keys, ?array $options = null): Relay|int|false {}
+
+    /**
      * This command is equal to SDIFF, but instead of returning the resulting set,
      * it is stored in destination. If destination already exists, it is overwritten.
      *
@@ -3226,6 +3293,16 @@ class Relay
      */
     #[Attributes\RedisCommand, Attributes\ValkeyCommand, Attributes\Cached]
     public function sunion(mixed $key, mixed ...$other_keys): Relay|array|false {}
+
+    /**
+     * Union multiple sets and return the cardinality of the result.
+     *
+     * @param  array  $keys
+     * @param  array|null  $options
+     * @return Relay|int|false
+     */
+    #[Attributes\RedisCommand, Attributes\ValkeyCommand, Attributes\Cached]
+    public function sunioncard(array $keys, ?array $options = null): Relay|int|false {}
 
     /**
      * This command is equal to SUNION, but instead of returning the resulting set,
@@ -3979,7 +4056,7 @@ class Relay
      * @param  mixed  $key
      * @param  string  $start
      * @param  string  $end
-     * @param  int  $count = -1
+     * @param  int  $count
      * @return Relay|array|false
      */
     #[Attributes\RedisCommand, Attributes\ValkeyCommand]
@@ -4254,7 +4331,7 @@ class Relay
      * @param  mixed  $max
      * @return Relay|int|false
      */
-    #[Attributes\RedisCommand, Attributes\ValkeyCommand]
+    #[Attributes\RedisCommand, Attributes\ValkeyCommand, Attributes\Cached]
     public function zcount(mixed $key, mixed $min, mixed $max): Relay|int|false {}
 
     /**
@@ -4453,7 +4530,7 @@ class Relay
      *
      * @param  mixed  $dstkey
      * @param  array  $keys
-     * @param  array  $weights = []
+     * @param  array  $weights
      */
     public function cmsMerge(mixed $dstkey, array $keys, array $weights = []): Relay|bool {}
 

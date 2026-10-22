@@ -2,8 +2,11 @@
 
 namespace StubTests\Framework\Validator\Classes\Methods;
 
-use StubTests\Framework\Parsers\Model\PHPMethod;
-use StubTests\Framework\Validator\AbstractMethodFlagCheck;
+use StubTests\Framework\Validator\AbstractMemberFlagCheck;
+use StubTests\Framework\Validator\Contracts\DescribesMethodMismatch;
+use StubTests\Framework\Validator\Contracts\MemberKind;
+use StubTests\Framework\Model\PHPMethod;
+use StubTests\Framework\Validator\KnownProblems\CheckType;
 
 /**
  * Validates that the tentative-return-type flag on methods in stubs matches reflection.
@@ -28,27 +31,35 @@ use StubTests\Framework\Validator\AbstractMethodFlagCheck;
  * - class-level:  EntityType::CLASS_TYPE + classId + 'TentativeReturnTypeCheck'
  * - method-level: EntityType::METHOD + '\ClassName::methodName' + 'TentativeReturnTypeCheck'
  */
-class ClassMethodsTentativeReturnTypeCheck extends AbstractMethodFlagCheck
+class ClassMethodsTentativeReturnTypeCheck extends AbstractMemberFlagCheck implements DescribesMethodMismatch
 {
+    protected function memberKind(): MemberKind
+    {
+        return MemberKind::METHOD;
+    }
+
     public function supports(string $phpVersion): bool
     {
         // Tentative return types were introduced in PHP 8.1
         return version_compare($phpVersion, '8.1', '>=');
     }
 
-    protected function getCheckName(): string
+    protected function getCheckName(): CheckType
     {
-        return 'TentativeReturnTypeCheck';
+        return CheckType::TENTATIVE_RETURN_TYPE;
     }
 
-    protected function describeMismatch(
+    public function describeMethodMismatch(
         string $methodEntityId,
-        mixed $reflMethod,
+        PHPMethod $reflMethod,
         PHPMethod $stubMethod,
         string $phpVersion
     ): ?string {
-        $reflTentative = method_exists($reflMethod, 'hasTentativeReturnType')
-            && (bool)$reflMethod->hasTentativeReturnType();
+        // No method_exists() guard: $reflMethod is declared PHPMethod, which always has
+        // hasTentativeReturnType(). The guard could never be false, and if a non-PHPMethod were
+        // ever passed it silently reported "not tentative" for every method in the suite — a
+        // green run that validated nothing. The parameter type now raises a TypeError instead.
+        $reflTentative = $reflMethod->hasTentativeReturnType();
         $stubTentative = $stubMethod->hasTentativeReturnType();
 
         if ($reflTentative === $stubTentative) {

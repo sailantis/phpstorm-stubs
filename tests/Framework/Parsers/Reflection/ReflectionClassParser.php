@@ -2,7 +2,7 @@
 
 namespace StubTests\Framework\Parsers\Reflection;
 
-use StubTests\Framework\Parsers\Model\PHPClass;
+use StubTests\Framework\Model\PHPClass;
 use StubTests\Framework\Parsers\Reflection\Wrappers\AdaptedReflectionClass;
 use StubTests\Framework\Parsers\Parser;
 
@@ -78,6 +78,9 @@ class ReflectionClassParser implements Parser
                 $class->addImplementedInterface($this->interfaceParser->parse($interface));
             }
         }
+        // Class-level attributes (already captured as [name, evaluated arguments] by the
+        // adapter) so checks can validate e.g. the `#[Attribute(...)]` target flags.
+        $class->setAttributes($object->getAttributes() ?? []);
         return $class;
     }
 }

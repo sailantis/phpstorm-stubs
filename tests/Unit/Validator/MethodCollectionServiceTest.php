@@ -2,9 +2,8 @@
 
 namespace StubTests\Unit\Validator;
 
-use StubTests\Framework\Parsers\Model\PHPClass;
-use StubTests\Framework\Parsers\Model\PHPMethod;
-use StubTests\Framework\Parsers\Model\PHPProperty;
+use StubTests\Framework\Model\PHPClass;
+use StubTests\Framework\Model\PHPMethod;
 use StubTests\Framework\Runner\PhpVersions;
 use StubTests\Framework\Validator\Services\MethodCollectionService;
 
@@ -19,20 +18,6 @@ class MethodCollectionServiceTest extends CheckTestCase
     }
 
     // ── Helpers ──────────────────────────────────────────────────────────────
-
-    private function makeProperty(
-        string $name,
-        ?string $sinceVersion = null,
-        ?string $removedVersion = null
-    ): PHPProperty {
-        $prop = new PHPProperty();
-        $prop->setName($name);
-        if ($sinceVersion !== null || $removedVersion !== null) {
-            $prop->initStubsMetadata()->setSinceVersion($sinceVersion);
-            $prop->initStubsMetadata()->setRemovedVersion($removedVersion);
-        }
-        return $prop;
-    }
 
     // ── collectForClass: basic ───────────────────────────────────────────────
 
@@ -368,7 +353,7 @@ class MethodCollectionServiceTest extends CheckTestCase
 
     public function testFilterAndDeduplicateParamsDelegatesToHelper(): void
     {
-        $param = new \StubTests\Framework\Parsers\Model\PHPParameter('value');
+        $param = new \StubTests\Framework\Model\PHPParameter('value');
 
         $result = $this->service->filterAndDeduplicateParams([$param], PhpVersions::LATEST->value);
 

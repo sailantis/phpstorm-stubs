@@ -78,6 +78,13 @@ class Cluster
     public const OPT_SLAVE_FAILOVER = 5;
 
     /**
+     * Modern alias for `OPT_SLAVE_FAILOVER`.
+     *
+     * @var int
+     */
+    public const OPT_REPLICA_FAILOVER = 5;
+
+    /**
      * Controls the retry strategy when a command fails on a node.
      *
      * @see self::FAILOVER_NONE
@@ -88,6 +95,62 @@ class Cluster
      * @var int
      */
     public const OPT_FAILOVER = 17;
+
+    /**
+     * Overrides the read timeout for each node attempted by a distributed or
+     * failover readonly command. A value of 0.0 disables the override.
+     *
+     * @var int
+     */
+    public const OPT_NODE_READ_TIMEOUT = 18;
+
+    /**
+     * Controls whether noncontiguous keys may be reordered and grouped by hash
+     * slot for supported multi-key commands. The default preserves PhpRedis'
+     * command ordering while still grouping adjacent keys in the same slot.
+     *
+     * @see self::MULTIKEY_REORDER_NONE
+     * @see self::MULTIKEY_REORDER_READS
+     * @see self::MULTIKEY_REORDER_WRITES
+     * @see self::MULTIKEY_REORDER_ALL
+     * @var int
+     */
+    public const OPT_MULTIKEY_REORDERING = 19;
+
+    /**
+     * Preserve key order and only group adjacent keys in the same hash slot.
+     *
+     * @see self::OPT_MULTIKEY_REORDERING
+     * @var int
+     */
+    public const MULTIKEY_REORDER_NONE = 0;
+
+    /**
+     * Permit readonly multi-key commands to group all keys by hash slot.
+     * Returned values retain the order of the supplied keys.
+     *
+     * @see self::OPT_MULTIKEY_REORDERING
+     * @var int
+     */
+    public const MULTIKEY_REORDER_READS = 1;
+
+    /**
+     * Permit mutating multi-key commands to group all keys by hash slot. This
+     * may change their execution order relative to the supplied keys.
+     *
+     * @see self::OPT_MULTIKEY_REORDERING
+     * @var int
+     */
+    public const MULTIKEY_REORDER_WRITES = 2;
+
+    /**
+     * Permit both readonly and mutating multi-key commands to group all keys by
+     * hash slot.
+     *
+     * @see self::OPT_MULTIKEY_REORDERING
+     * @var int
+     */
+    public const MULTIKEY_REORDER_ALL = 3;
 
     /**
      * Enabled by default. Send commands to master nodes only.
@@ -121,6 +184,13 @@ class Cluster
      * @var int
      */
     public const FAILOVER_DISTRIBUTE_SLAVES = 3;
+
+    /**
+     * Modern alias for `FAILOVER_DISTRIBUTE_SLAVES`.
+     *
+     * @var int
+     */
+    public const FAILOVER_DISTRIBUTE_REPLICAS = 3;
 
     /**
      * On failure, retry the readonly command on a randomly selected replica.
@@ -426,6 +496,27 @@ class Cluster
      */
     #[Attributes\RedisCommand, Attributes\ValkeyCommand]
     public function blmove(mixed $srckey, mixed $dstkey, string $srcpos, string $dstpos, float $timeout): Cluster|string|null|false {}
+
+    /**
+     * Blocking move of one or more elements from the source to destination list.
+     *
+     * @param  mixed  $srckey
+     * @param  mixed  $dstkey
+     * @param  string  $srcpos
+     * @param  string  $dstpos
+     * @param  float  $timeout
+     * @param  array|null  $options
+     * @return Cluster|array|null|false
+     */
+    #[Attributes\RedisCommand]
+    public function blmovem(
+        mixed $srckey,
+        mixed $dstkey,
+        string $srcpos,
+        string $dstpos,
+        float $timeout,
+        ?array $options = null
+    ): Cluster|array|null|false {}
 
     /**
      * Pop elements from a list, or block until one is available.
@@ -811,6 +902,32 @@ class Cluster
     public function expiretime(mixed $key): Cluster|int|false {}
 
     /**
+     * Invokes a Redis function. At least one key is required, and all keys
+     * must hash to the same cluster slot.
+     *
+     * @param  string  $name
+     * @param  array  $keys
+     * @param  array  $argv
+     * @param  callable|null  $handler
+     * @return mixed
+     */
+    #[Attributes\RedisCommand, Attributes\ValkeyCommand]
+    public function fcall(string $name, array $keys = [], array $argv = [], ?callable $handler = null): mixed {}
+
+    /**
+     * Invokes a read-only Redis function. At least one key is required, and
+     * all keys must hash to the same cluster slot.
+     *
+     * @param  string  $name
+     * @param  array  $keys
+     * @param  array  $argv
+     * @param  callable|null  $handler
+     * @return mixed
+     */
+    #[Attributes\RedisCommand, Attributes\ValkeyCommand]
+    public function fcall_ro(string $name, array $keys = [], array $argv = [], ?callable $handler = null): mixed {}
+
+    /**
      * @see Relay::flushMemory()
      *
      * @param  string|null  $endpointId
@@ -984,7 +1101,7 @@ class Cluster
      * @param  int  $maxBurst
      * @param  int  $requestsPerPeriod
      * @param  int  $period
-     * @param  int  $tokens = 0
+     * @param  int  $tokens
      * @return Cluster|array|false
      */
     #[Attributes\RedisCommand]
@@ -1050,6 +1167,14 @@ class Cluster
      */
     #[Attributes\RedisCommand, Attributes\ValkeyCommand]
     public function getdel(mixed $key): mixed {}
+
+    /**
+     * Returns the currently selected database.
+     *
+     * @return int|false
+     */
+    #[Attributes\Local]
+    public function getDbNum(): mixed {}
 
     /**
      * Returns the last error message, if any.
@@ -1236,6 +1361,25 @@ class Cluster
     public function hget(mixed $key, mixed $member): mixed {}
 
     /**
+     * Manages session-local HIMPORT fieldsets and imports hash values.
+     *
+     * The hash selects the cluster node for every operation, but is only sent
+     * to Redis for SET.
+     *
+     * @param  string  $op
+     * @param  string  $hash
+     * @param  string|null  $fieldset
+     * @param  array  $fields
+     * @return Cluster|bool|int
+     */
+    public function himport(
+        string $op,
+        string $hash,
+        ?string $fieldset = null,
+        array $fields = []
+    ): Cluster|bool|int {}
+
+    /**
      * Returns all fields and values of the hash stored at key.
      *
      * @param  mixed  $key
@@ -1364,7 +1508,7 @@ class Cluster
      *
      * @param  mixed  $key
      * @param  array  $fields
-     * @param  null|int|float|array  $expiry = null
+     * @param  null|int|float|array  $expiry
      * @return Cluster|int|false
      */
     #[Attributes\RedisCommand, Attributes\ValkeyCommand]
@@ -1396,7 +1540,7 @@ class Cluster
      *
      * @param  mixed  $hash
      * @param  array  $fields
-     * @param  mixed  $expiry = null
+     * @param  mixed  $expiry
      * @return Cluster|array|false
      */
     public function hgetex(mixed $hash, array $fields, mixed $expiry = null): Cluster|array|false {}
@@ -1564,6 +1708,25 @@ class Cluster
     public function lmove(mixed $srckey, mixed $dstkey, string $srcpos, string $dstpos): Cluster|string|null|false {}
 
     /**
+     * Move one or more elements from the source to destination list.
+     *
+     * @param  mixed  $srckey
+     * @param  mixed  $dstkey
+     * @param  string  $srcpos
+     * @param  string  $dstpos
+     * @param  array|null  $options
+     * @return Cluster|array|null|false
+     */
+    #[Attributes\RedisCommand]
+    public function lmovem(
+        mixed $srckey,
+        mixed $dstkey,
+        string $srcpos,
+        string $dstpos,
+        ?array $options = null
+    ): Cluster|array|null|false {}
+
+    /**
      * Pops one or more elements from the first non-empty list key from the list of provided key names.
      *
      * @param  array  $keys
@@ -1690,6 +1853,17 @@ class Cluster
     public function mset(array $kvals): Cluster|array|bool {}
 
     /**
+     * Sets the given keys to their respective values with optional TTL
+     * information.
+     *
+     * @param  array  $kvals
+     * @param  int|float|array|null  $ttl
+     * @return Cluster|int|false
+     */
+    #[Attributes\RedisCommand]
+    public function msetex(array $kvals, int|float|array|null $ttl = null): Cluster|int|false {}
+
+    /**
      * Sets the given keys to their respective values.
      * MSETNX will not perform any operation at all even if just a single key already exists.
      *
@@ -1709,6 +1883,16 @@ class Cluster
      */
     #[Attributes\RedisCommand, Attributes\ValkeyCommand]
     public function multi(int $mode = Relay::MULTI): Cluster|bool {}
+
+    /**
+     * Move key from the currently selected database to the specified destination database.
+     *
+     * @param  mixed  $key
+     * @param  int  $db
+     * @return Cluster|int|false
+     */
+    #[Attributes\RedisCommand, Attributes\ValkeyCommand]
+    public function move(mixed $key, int $db): Cluster|int|false {}
 
     /**
      * This is a container command for object introspection commands.
@@ -2058,6 +2242,16 @@ class Cluster
     public function sdiff(mixed $key, mixed ...$other_keys): Cluster|array|false {}
 
     /**
+     * Returns the number of members of the difference between the first set and all successive sets.
+     *
+     * @param  array  $keys
+     * @param  array|null  $options
+     * @return Cluster|int|false
+     */
+    #[Attributes\RedisCommand, Attributes\Cached]
+    public function sdiffcard(array $keys, ?array $options = null): Cluster|int|false {}
+
+    /**
      * This command is equal to SDIFF, but instead of returning the resulting set, it is stored in destination.
      * If destination already exists, it is overwritten.
      *
@@ -2067,6 +2261,15 @@ class Cluster
      */
     #[Attributes\RedisCommand, Attributes\ValkeyCommand]
     public function sdiffstore(mixed $key, mixed ...$other_keys): Cluster|int|false {}
+
+    /**
+     * Select the Redis logical database having the specified zero-based numeric index.
+     *
+     * @param  int  $db
+     * @return Cluster|bool|string
+     */
+    #[Attributes\RedisCommand, Attributes\ValkeyCommand]
+    public function select(int $db): Cluster|bool|string {}
 
     /**
      * Set key to hold the string value. If key already holds
@@ -2090,6 +2293,8 @@ class Cluster
      * - `OPT_THROW_ON_ERROR`
      * - `OPT_CLIENT_INVALIDATIONS`
      * - `OPT_PHPREDIS_COMPATIBILITY`
+     * - `OPT_NODE_READ_TIMEOUT`
+     * - `OPT_MULTIKEY_REORDERING`
      *
      * Supported PhpRedis options:
      *
@@ -2351,6 +2556,16 @@ class Cluster
      */
     #[Attributes\RedisCommand, Attributes\ValkeyCommand, Attributes\Cached]
     public function sunion(mixed $key, mixed ...$other_keys): Cluster|array|false {}
+
+    /**
+     * Union multiple sets and return the cardinality of the result.
+     *
+     * @param  array  $keys
+     * @param  array|null  $options
+     * @return Cluster|int|false
+     */
+    #[Attributes\RedisCommand, Attributes\ValkeyCommand, Attributes\Cached]
+    public function sunioncard(array $keys, ?array $options = null): Cluster|int|false {}
 
     /**
      * This command is equal to SUNION, but instead of returning the resulting set, it is stored in destination.
@@ -2741,7 +2956,7 @@ class Cluster
      * @param  mixed  $key
      * @param  string  $start
      * @param  string  $end
-     * @param  int  $count = -1
+     * @param  int  $count
      * @return Cluster|array|false
      */
     #[Attributes\RedisCommand, Attributes\ValkeyCommand]
@@ -2823,7 +3038,7 @@ class Cluster
      * @param  mixed  $max
      * @return Cluster|int|false
      */
-    #[Attributes\RedisCommand, Attributes\ValkeyCommand]
+    #[Attributes\RedisCommand, Attributes\ValkeyCommand, Attributes\Cached]
     public function zcount(mixed $key, mixed $min, mixed $max): Cluster|int|false {}
 
     /**

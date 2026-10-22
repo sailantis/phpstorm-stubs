@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use StubTests\Framework\Runner\PhpVersionRange;
 use StubTests\Framework\Runner\PhpVersions;
-use StubTests\Framework\Parsers\StubDataQueryInterface;
+use StubTests\Framework\Storage\StubDataQueryInterface;
 use StubTests\Framework\Runner\RunnerScope;
 use StubTests\Framework\Validator\Contracts\CheckDescriptor;
 use StubTests\Framework\Validator\Contracts\CheckInterface;
@@ -168,7 +168,7 @@ abstract class ValidatorTestBase extends TestCase
      * Subclasses should override to return specific entity types.
      *
      * @param string $methodName
-     * @param \StubTests\Framework\Parsers\StubDataQueryInterface $reflection
+     * @param \StubTests\Framework\Storage\StubDataQueryInterface $reflection
      * @return iterable
      */
     protected static function getEntitiesForMethod(string $methodName, StubDataQueryInterface $reflection): iterable
@@ -223,11 +223,22 @@ abstract class ValidatorTestBase extends TestCase
         string $phpVersion,
         ?string $customMessage = null
     ): void {
-        // Skip if check doesn't support this PHP version
+        // A registration that asks for a version the check does not support is a bug in the
+        // registration, not a legitimate skip: the CheckDescriptor range (or PhpVersionRange
+        // attribute) and the check's own supports() gate disagree. Skipping here made that
+        // disagreement invisible — the test reported as skipped rather than drawing attention
+        // to the mismatch. Fail loudly instead, and name both sides so it is actionable.
+        //
+        // As of 2026-07-26 no registration triggers this: every descriptor range is within
+        // what its check supports (verified across all 32 gated registrations, and by the
+        // suites reporting zero skips), so this is a guard against future drift.
         if (!$check->supports($phpVersion)) {
-            $this->markTestSkipped(
-                get_class($check) . " does not support PHP {$phpVersion}"
-            );
+            $this->fail(sprintf(
+                '%s::supports(%s) is false, but the check is registered for that version. '
+                . 'Narrow the registered version range to match the check, or widen supports().',
+                get_class($check),
+                $phpVersion
+            ));
         }
 
         $stubs = $this->stubsProvider->getStubs();
